@@ -7,8 +7,6 @@
       <v-toolbar-items class="d-none d-md-block">
         <v-btn class="transparent" elevation="0" @click="go('/scan')"><v-icon class="mr-2" :icon="mdiCamera" />{{ $t('navigation.scan') }}</v-btn>
         <v-btn class="transparent" elevation="0" @click="go('/files')"><v-icon class="mr-2" :icon="mdiFileDocumentMultiple" />{{ $t('navigation.files') }}</v-btn>
-        <v-btn class="transparent" elevation="0" @click="go('/settings')"><v-icon class="mr-2" :icon="mdiCog" />{{ $t('navigation.settings') }}</v-btn>
-        <v-btn class="transparent" elevation="0" @click="go('/about')"><v-icon class="mr-2" :icon="mdiInformation" />{{ $t('navigation.about') }}</v-btn>
       </v-toolbar-items>
     </v-app-bar>
 
@@ -37,24 +35,7 @@
             <v-icon :icon="mdiInformation" />
           </template>
         </v-list-item>
-
-        <v-divider />
-
-        <v-list-item>
-          <v-list-item-title class="unselectable">{{ $t('navigation.version') }} {{ version }}</v-list-item-title>
-          <template #prepend>
-            <v-icon :icon="mdiTools" />
-          </template>
-        </v-list-item>
       </v-list>
-
-      <template #append>
-        <div class="d-flex flex-row pa-4 text-caption">
-          <div class="ml-auto">
-            &copy; 2016 - {{ new Date().getFullYear() }} Sam Strachan
-          </div>
-        </div>
-      </template>
     </v-navigation-drawer>
   </div>
 </template>
