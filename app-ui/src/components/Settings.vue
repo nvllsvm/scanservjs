@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div class="text-h5 mb-4">{{ $t('settings.title') }}</div>
     <settings-section>
-      <template #title>{{ $t('settings.behaviour-ui') }}</template>
       <template #items>
         <settings-item>
           <template #description>
@@ -16,38 +14,6 @@
         </settings-item>
         <settings-item>
           <template #description>
-            {{ $t('settings.color:description') }}
-          </template>
-          <template #action>
-            <div style="max-width: 10rem;">
-              <v-menu offset-y>
-                <template #activator="{ props }">
-                  <v-btn v-bind="props">{{ $t('settings.color') }}</v-btn>
-                </template>
-                <v-list>
-                  <v-list-item v-for="item in colors" :key="item.value" :class="`bg-${item.value}`"
-                    min-height="36px"
-                    :title="item.text"
-                    @click="settings.appColor = item.value; reload()" />
-                </v-list>
-              </v-menu>
-            </div>
-          </template>
-        </settings-item>
-        <settings-item>
-          <template #description>
-            {{ $t('settings.locale:description') }}
-          </template>
-          <template #action>
-            <div style="max-width: 10rem;">
-              <v-select v-model="settings.locale" :label="$t('settings.locale')"
-                :items="locales" item-title="text"
-                item-value="value" @update:model-value="reload" />
-            </div>
-          </template>
-        </settings-item>
-        <settings-item>
-          <template #description>
             {{ $t('settings.show-files-after-scan:description') }}
           </template>
           <template #action>
@@ -56,21 +22,6 @@
             </div>
           </template>
         </settings-item>
-      </template>
-    </settings-section>
-
-    <settings-section>
-      <template #title>{{ $t('settings.devices') }}</template>
-      <template #items>
-        <settings-item>
-          <template #description>
-            {{ $t('settings.reset:description') }}
-          </template>
-          <template #action>
-            <v-btn color="warning" class="ml-1 mb-1" @click="reset">{{ $t('settings.reset') }} <v-icon class="ml-2" :icon="mdiRefresh" /></v-btn>
-          </template>
-        </settings-item>
-
         <settings-item>
           <template #description>
             {{ $t('settings.clear-storage:description') }}
