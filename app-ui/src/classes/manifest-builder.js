@@ -43,8 +43,8 @@ export default class ManifestBuilder {
       display : 'standalone',
       scope : '/',
       start_url : '/#/scan',
-      name : 'scanservjs',
-      short_name : 'scanservjs',
+      name : 'Epson Perfection V600 Photo',
+      short_name : 'Epson V600',
       description : 'SANE scanner nodejs web ui',
       icons : [
         {
