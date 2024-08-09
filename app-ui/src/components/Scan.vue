@@ -4,15 +4,6 @@
       <v-spacer />
 
       <v-col cols="12" md="3" class="mb-10 mb-md-0">
-        <div class="d-flex">
-          <v-select v-if="context.devices.length > 0"
-            v-model="device"
-            style="min-width: 0px;"
-            :label="$t('scan.device')"
-            :items="context.devices" return-object item-title="name" @update:model-value="clear" />
-          <v-btn small class="ml-2 mt-4 pl-1 pr-1" min-width="32" @click="deviceRefresh"><v-icon :icon="mdiRefresh" /></v-btn>
-        </div>
-
         <v-select v-if="'--source' in device.features"
           v-model="request.params.source"
           :no-data-text="$t('global.no-data-text')" :label="$t('scan.source')"
