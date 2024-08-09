@@ -180,7 +180,7 @@
     "locale": "Locale",
     "locale:description": "Choose your locale",
     "theme": "Theme",
-    "theme:description": "Theme. If you use system theme and change it, you will need to reload the app.",
+    "theme:description": "If you use system theme and change it, you will need to reload the app.",
     "theme:system": "System",
     "theme:light": "Light",
     "theme:dark": "Dark",

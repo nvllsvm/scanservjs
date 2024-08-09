@@ -4,11 +4,13 @@
       <template #items>
         <settings-item>
           <template #description>
+            {{ $t('settings.theme') }}
+            <br>
             {{ $t('settings.theme:description') }}
           </template>
           <template #action>
             <div style="max-width: 10rem;">
-              <v-select v-model="settings.theme" :label="$t('settings.theme')" :items="themes" item-title="text" @update:model-value="reload" />
+              <v-select v-model="settings.theme" :items="themes" item-title="text" @update:model-value="reload" />
             </div>
           </template>
         </settings-item>
