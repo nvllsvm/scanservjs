@@ -37,6 +37,7 @@
             { value: true, text: $t('scan.dynamic-lineart:enabled') }]"
           item-value="value" item-title="text" />
 
+        <!--
         <v-select v-model="request.batch" :label="$t('scan.batch')"
           :no-data-text="$t('global.no-data-text')"
           :items="batchModes" item-value="value" item-title="text" />
@@ -50,6 +51,7 @@
           :label="$t('scan.filters')"
           multiple
           @update:model-value="readPreview" />
+        -->
 
         <v-select
           v-model="request.pipeline"
@@ -95,6 +97,7 @@
           </v-menu>
         </template>
 
+        <!--
         <template v-if="'--brightness' in device.features">
           <v-slider v-model="request.params.brightness" class="align-center ml-0"
             :step="device.features['--brightness']['interval']"
@@ -118,6 +121,7 @@
             </template>
           </v-slider>
         </div>
+        -->
       </v-col>
       
       <v-spacer />
