@@ -70,52 +70,13 @@ class ScanController {
    * @returns {Promise.<FileInfo>}
    */
   async finish() {
-    log.debug(`Post processing: ${this.pipeline.description}`);
-    let files = (await this.listFiles()).filter(f => f.extension === '.tif');
+    let files = await this.listFiles();
+    let filename = files[0].name;
+    const destination = `${config.outputDirectory}/${filename}`;
 
-    // Update preview with the first image (pre filter)
-    await this.updatePreview(files[0].name);
-
-    // Collation
-    if ([Constants.BATCH_COLLATE_STANDARD, Constants.BATCH_COLLATE_REVERSE].includes(this.request.batch)) {
-      files = Collator.collate(files, this.request.batch === Constants.BATCH_COLLATE_STANDARD);
-    }
-
-    // Apply filters
-    if (this.request.filters.length > 0) {
-      const stdin = files.map(f => `${f.name}\n`).join('');
-      const cmd = `convert @- ${application.filterBuilder().build(this.request.filters)} f-%04d.tif`;
-      await Process.spawn(cmd, stdin, { cwd: config.tempDirectory });
-      files = (await this.listFiles()).filter(f => f.name.match(/f-\d{4}\.tif/));
-    }
-
-    const stdin = files.map(f => `${f.name}\n`).join('');
-    log.debug('Executing cmds:', this.pipeline.commands);
-    const stdout = await Process.chain(this.pipeline.commands, stdin, { cwd: config.tempDirectory });
-    let filenames = stdout.toString().split('\n').filter(f => f.length > 0);
-
-    let filename = filenames[0];
-    let extension = this.pipeline.extension;
-    if (filenames.length > 1) {
-      filename = 'archive.zip';
-      extension = 'zip';
-      Zip.file(`${config.tempDirectory}/${filename}`)
-        .deflate(filenames.map(f => `${config.tempDirectory}/${f}`));
-    }
-
-    const destination = `${config.outputDirectory}/${config.filename()}.${extension}`;
-    await FileInfo
-      .create(`${config.tempDirectory}/${filename}`)
-      .move(destination);
-
-    log.debug({output: destination});
     await this.deleteFiles();
 
     const fileInfo = FileInfo.create(destination);
-    if ('afterAction' in this.pipeline) {
-      userOptions.action(this.pipeline.afterAction).execute(fileInfo);
-    }
-
     return fileInfo;
   }
 
