@@ -122,11 +122,11 @@ module.exports = class ScanimageCommand {
       const pattern = `${this.config.tempDirectory}/${Constants.TEMP_FILESTEM}-${request.index}-%04d.tif`;
       cmdBuilder.argPair('--batch', pattern);
     } else {
-      const outputFile = 'isPreview' in params && params.isPreview
-        ? `${this.config.previewDirectory}/preview.tif`
-        : this.filename(request.index);
-
-      cmdBuilder.arg('-o', outputFile);
+      if ('isPreview' in params && params.isPreview) {
+        cmdBuilder.arg('--preview')
+      } else {
+        cmdBuilder.arg('-o', this.filename(request.index));
+      }
     }
     return cmdBuilder.build();
   }
