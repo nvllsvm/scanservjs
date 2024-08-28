@@ -83,6 +83,18 @@ module.exports = class Request {
       this.params.adfMode = data.params.adfMode || features['--adf-mode'].default;
       assertContains(features['--adf-mode'].options, this.params.adfMode, 'Invalid --adf-mode');
     }
+    if ('--gamma-correction' in features) {
+      this.params.gammaCorrection = data.params.gammaCorrection || features['--gamma-correction'].default;
+      assertContains(features['--gamma-correction'].options, this.params.gammaCorrection, 'Invalid --gamma-correction');
+    }
+    if ('--color-correction' in features) {
+      this.params.colorCorrection = data.params.colorCorrection || features['--color-correction'].default;
+      assertContains(features['--color-correction'].options, this.params.colorCorrection, 'Invalid --color-correction');
+    }
+    if ('--color-space' in features) {
+      this.params.colorSpace = data.params.colorSpace || features['--color-space'].default;
+      assertContains(features['--color-space'].options, this.params.colorSpace, 'Invalid --color-space');
+    }
     if ('--depth' in features) {
       this.params.depth = data.params.depth || features['--depth'].default;
       assertContains(features['--depth'].options, this.params.depth, 'Invalid --depth');

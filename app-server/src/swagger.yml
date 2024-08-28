@@ -557,6 +557,15 @@ definitions:
       source:
         type: string
         example: 'Flatbed'
+      gammaCorrection:
+        type: string
+        example: '2.2'
+      colorCorrection:
+        type: string
+        example: 'yes'
+      colorSpace:
+        type: string
+        example: 'Adobe RGB (1998)'
       adfMode:
         type: string
         example: 'Simplex'

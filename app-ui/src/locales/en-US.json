@@ -107,6 +107,11 @@
     "duplex": "Duplex"
   },
 
+  "color-correction": {
+    "yes": "Enabled",
+    "no": "Disabled"
+  },
+
   "source": {
     "flatbed": "Flatbed",
     "adf": "ADF",
@@ -150,6 +155,9 @@
     "resolution": "Resolution",
     "mode": "Mode",
     "adf-mode": "ADF Mode",
+    "gamma-correction": "Gamma Correction",
+    "color-correction": "Color Correction",
+    "color-space": "Color Space",
     "depth": "Color Depth",
     "dynamic-lineart": "Dynamic Lineart",
     "dynamic-lineart:enabled": "Enabled",

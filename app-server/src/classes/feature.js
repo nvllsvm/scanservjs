@@ -107,6 +107,9 @@ module.exports = class Feature {
           this.asLighting();
           break;
 
+        case '--gamma-correction':
+        case '--color-correction':
+        case '--color-space':
         case '--ald':
           this.asEnum();
           break;

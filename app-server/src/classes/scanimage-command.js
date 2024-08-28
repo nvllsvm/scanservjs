@@ -79,6 +79,15 @@ module.exports = class ScanimageCommand {
     if ('mode' in params) {
       cmdBuilder.arg('--mode', params.mode);
     }
+    if ('gammaCorrection' in params) {
+      cmdBuilder.arg('--gamma-correction', params.gammaCorrection);
+    }
+    if ('colorCorrection' in params) {
+      cmdBuilder.arg('--color-correction', params.colorCorrection);
+    }
+    if ('colorSpace' in params) {
+      cmdBuilder.arg('--color-space', params.colorSpace);
+    }
     if ('adfMode' in params) {
       cmdBuilder.arg('--adf-mode', params.adfMode);
     }

@@ -14,6 +14,21 @@
           :no-data-text="$t('global.no-data-text')" :label="$t('scan.adf-mode')"
           :items="adfModes" item-value="value" item-title="text" />
 
+        <v-select v-if="'--color-correction' in device.features"
+          v-model="request.params.colorCorrection"
+          :no-data-text="$t('global.no-data-text')" :label="$t('scan.color-correction')"
+          :items="colorCorrections" item-value="value" item-title="text" />
+
+        <v-select v-if="'--color-space' in device.features"
+          v-model="request.params.colorSpace"
+          :no-data-text="$t('global.no-data-text')" :label="$t('scan.color-space')"
+          :items="device.features['--color-space']['options']" />
+
+        <v-select v-if="'--gamma-correction' in device.features"
+          v-model="request.params.gammaCorrection"
+          :no-data-text="$t('global.no-data-text')" :label="$t('scan.gamma-correction')"
+          :items="device.features['--gamma-correction']['options']" />
+
         <v-select v-if="'--depth' in device.features"
           v-model="request.params.depth"
           :no-data-text="$t('global.no-data-text')" :label="$t('scan.depth')"
@@ -240,6 +255,18 @@ export default {
           return {
             text: this.te(key) ? this.$t(key) : mode,
             value: mode
+          };
+        })
+        : undefined;
+    },
+
+    colorCorrections() {
+      return '--color-correction' in this.device.features
+        ? this.device.features['--color-correction'].options.map(colorCorrection => {
+          const key = `color-correction.${sanitiseLocaleKey(colorCorrection)}`;
+          return {
+            text: this.te(key) ? this.$t(key) : colorCorrection,
+            value: colorCorrection
           };
         })
         : undefined;

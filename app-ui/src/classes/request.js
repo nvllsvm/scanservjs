@@ -47,6 +47,15 @@ export default class Request {
     if ('--depth' in device.features) {
       this.params.depth = request.params.depth || device.features['--depth'].default;
     }
+    if ('--gamma-correction' in device.features) {
+      this.params.gammaCorrection = request.params.gammaCorrection || device.features['--gamma-correction'].default;
+    }
+    if ('--color-correction' in device.features) {
+      this.params.colorCorrection = request.params.colorCorrection || device.features['--color-correction'].default;
+    }
+    if ('--color-space' in device.features) {
+      this.params.colorSpace = request.params.colorSpace || device.features['--color-space'].default;
+    }
     if ('--mode' in device.features) {
       this.params.mode = request.params.mode || device.features['--mode'].default;
     }
