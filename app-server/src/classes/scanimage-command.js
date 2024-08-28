@@ -114,16 +114,6 @@ module.exports = class ScanimageCommand {
     }
 
     cmdBuilder.arg('--format', params.format);
-    // set neutral calibration to disable the poor defaults
-    cmdBuilder.arg('--cct-1', '1'); // red level
-    cmdBuilder.arg('--cct-2', '0'); // Adds to red based on green level
-    cmdBuilder.arg('--cct-3', '0'); // Adds to red based on blue level
-    cmdBuilder.arg('--cct-4', '0'); // Adds to green based on red level
-    cmdBuilder.arg('--cct-5', '1'); // green level
-    cmdBuilder.arg('--cct-6', '0'); // Adds to green based on blue level
-    cmdBuilder.arg('--cct-7', '0'); // Adds to blue based on red level
-    cmdBuilder.arg('--cct-8', '0'); // Adds to blue based on green level
-    cmdBuilder.arg('--cct-9', '1'); // blue level
 
     if ('ald' in params) {
       cmdBuilder.arg(`--ald=${params.ald}`);
