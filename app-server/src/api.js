@@ -83,7 +83,7 @@ module.exports = new class Api {
    */
   deletePreview() {
     log.trace('deletePreview()');
-    const file = FileInfo.create(`${config.previewDirectory}/preview.tif`);
+    const file = FileInfo.create(`${config.previewDirectory}/preview.jpg`);
     return file.delete();
   }
 
@@ -95,32 +95,9 @@ module.exports = new class Api {
     log.trace('readPreview()', filters);
     // The UI relies on this image being the correct aspect ratio. If there is a
     // preview image then just use it.
-    const source = FileInfo.create(`${config.previewDirectory}/preview.tif`);
-    if (source.exists()) {
-      const buffer = source.toBuffer();
-      const cmds = [...config.previewPipeline.commands];
-      if (filters && filters.length) {
-        const params = application.filterBuilder().build(filters, true);
-        cmds.splice(0, 0, `convert - ${params} tif:-`);
-      }
-
-      return await Process.chain(cmds, buffer, { ignoreErrors: true });
-    }
-
-    // If not then it's possible the default image is not quite the correct aspect ratio
-    const buffer = FileInfo.create(`${config.previewDirectory}/default.jpg`).toBuffer();
-
-    try {
-      // We need to know the correct aspect ratio from the device
-      const context = await application.context();
-      const device = context.getDevice();
-      const heightByWidth = device.features['-y'].limits[1] / device.features['-x'].limits[1];
-      const width = 868;
-      const height = Math.round(width * heightByWidth);
-      return await Process.spawn(`convert - -resize ${width}x${height}! jpg:-`, buffer);
-    } catch (e) {
-      return Promise.resolve(buffer);
-    }
+    const source = FileInfo.create(`${config.previewDirectory}/preview.jpg`);
+    const buffer = source.toBuffer();
+    return Promise.resolve(buffer);
   }
 
   /**
