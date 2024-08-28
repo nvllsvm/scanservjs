@@ -14,18 +14,6 @@ class Scanimage {
   constructor(config) {
     this.config = config;
   }
-
-  get version() {
-    if (this._version === undefined) {
-      const result = Process.executeSync(`${this.config.scanimage} -V`);
-      this._version = /.*backend version (.*)/.exec(result)[1];
-    }
-    return this._version;
-  }
-
-  get supportsOutputFlag() {
-    return semver.satisfies(this.version, '>=1.0.28');
-  }
 }
 
 module.exports = class ScanimageCommand {
@@ -138,11 +126,7 @@ module.exports = class ScanimageCommand {
         ? `${this.config.previewDirectory}/preview.tif`
         : this.filename(request.index);
 
-      if (this.scanimage.supportsOutputFlag) {
-        cmdBuilder.arg('-o', outputFile);
-      } else {
-        cmdBuilder.redirect('>').arg(outputFile);
-      }
+      cmdBuilder.arg('-o', outputFile);
     }
     return cmdBuilder.build();
   }
