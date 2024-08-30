@@ -41,7 +41,7 @@ class ScanController {
         case 'PNG':
             this.request.params.format = 'png'
             break;
-        case 'TIFF':
+        case 'TIF':
             this.request.params.format = 'tiff'
             break;
         default:

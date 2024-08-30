@@ -43,7 +43,7 @@ module.exports = class Request {
       params: {
         deviceId: device.id,
         resolution: data.params.resolution || features['--resolution'].default,
-        format: 'tiff',
+        format: data.params.format || features['--format'].default,
         isPreview: data.params.isPreview || false
       },
       filters: data.filters || device.settings.filters.default,
