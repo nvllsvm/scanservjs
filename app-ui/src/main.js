@@ -14,7 +14,6 @@ import App from './App.vue';
 import Files from './components/Files.vue';
 import Scan from './components/Scan.vue';
 import Settings from './components/Settings.vue';
-import About from './components/About.vue';
 
 const datetimeFormats = {};
 for (const locale of Constants.Locales) {
@@ -74,7 +73,6 @@ const vuetify = createVuetify({
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [
-    { path: '/about', component: About },
     { path: '/files', component: Files },
     { path: '/settings', component: Settings },
     { path: '/scan', component: Scan },

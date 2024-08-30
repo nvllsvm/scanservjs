@@ -34,6 +34,11 @@
         </settings-item>
       </template>
     </settings-section>
+
+    <div class="text-body-1 mb-4">
+      {{ $t('about.api') }}
+      <a target="_blank" href="api-docs">/api-docs</a>
+    </div>
   </div>
 </template>
 
