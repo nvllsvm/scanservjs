@@ -242,21 +242,6 @@ paths:
               schema:
                 $ref: '#/definitions/ScanResponse'
 
-  /api/v1/system:
-    get:
-      summary: Gets host system information
-      description: |
-        Gets host information which is useful for issue reporting
-      tags:
-        - System
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/definitions/SystemInfo'
-
 definitions:
   Feature:
     properties:
@@ -445,37 +430,6 @@ definitions:
         type: array
         items:
           type: string
-
-  SystemInfoOs:
-    properties:
-      arch:
-        type: string
-        example: "x64"
-      freemem:
-        type: integer
-        example: 219
-      platform:
-        type: string
-        example: "linux"
-      release:
-        type: string
-        example: "5.10.0-16-amd64"
-      type:
-        type: string
-        example: "Linux"
-      version:
-        type: string
-        example: "#1 SMP Debian 5.10.127-2 (2022-07-23)"
-
-  SystemInfo:
-    properties:
-      os:
-        $ref: "#/definitions/SystemInfoOs"
-      node:
-        type: string
-        example: "v12.22.12"
-      docker:
-        type: boolean
 
   FileInfo:
     properties:

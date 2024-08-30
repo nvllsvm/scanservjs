@@ -136,13 +136,4 @@ module.exports = new class Api {
     log.info(LogFormatter.format().full(context));
     return context;
   }
-
-  /**
-   * @returns {Promise.<SystemInfo>}
-   */
-  async readSystem() {
-    const systemInfo = await application.systemInfo();
-    log.debug(LogFormatter.format().full(systemInfo));
-    return systemInfo;
-  }
 };

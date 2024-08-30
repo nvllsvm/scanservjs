@@ -125,13 +125,6 @@
  */
 
 /**
- * @typedef {Object} SystemInfo
- * @property {OsInfo} os
- * @property {string} node
- * @property {boolean} docker
- */
-
-/**
  * @typedef {Function} FnActionExec
  * @param {FileInfo} fileInfo
  * @returns {Promise.<any>}

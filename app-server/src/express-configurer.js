@@ -140,11 +140,6 @@ const EndpointSpecs = [
     method: 'post',
     path: '/api/v1/scan',
     callback: async (req, res) => res.send(await api.scan(req.body))
-  },
-  {
-    method: 'get',
-    path: '/api/v1/system',
-    callback: async (req, res) => res.send(await api.readSystem())
   }
 ];
 

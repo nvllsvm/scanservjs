@@ -4,7 +4,6 @@ const DeviceIdParser = require('./classes/device-id-parser');
 const Device = require('./classes/device');
 const FileInfo = require('./classes/file-info');
 const FilterBuilder = require('./classes/filter-builder');
-const System = require('./classes/system');
 const UserOptions = require('./classes/user-options');
 
 module.exports = new class Application {
@@ -120,10 +119,6 @@ module.exports = new class Application {
   async context() {
     const devices = await this.deviceList();
     return new Context(this.config(), devices, this.userOptions());
-  }
-
-  async systemInfo() {
-    return await System.info();
   }
 
   filterBuilder() {
