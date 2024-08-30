@@ -97,19 +97,22 @@
           <v-text-field v-model="request.params.width" :label="$t('scan.width')" type="number" step="any" @blur="onCoordinatesChange" />
           <v-text-field v-model="request.params.height" :label="$t('scan.height')" type="number" step="any" @blur="onCoordinatesChange" />
 
-          <v-menu offset-y>
-            <template #activator="{ props }">
-              <v-btn color="primary" class="mb-4" v-bind="props">{{ $t('scan.paperSize') }}</v-btn>
-            </template>
-            <v-list dense>
-              <v-list-item
-                v-for="(item, index) in paperSizes"
-                :key="index"
-                @click="updatePaperSize(item)">
-                <v-list-item-title>{{ item.name }}</v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
+          <div class="d-flex flex-row-reverse flex-wrap">
+            <v-btn color="red" class="ml-1 mb-1" @click="setMaxPaperSize">{{ $t('scan.paperSize-reset') }}</v-btn>
+            <v-menu offset-y>
+              <template #activator="{ props }">
+                <v-btn color="primary" class="mb-4" v-bind="props">{{ $t('scan.paperSize') }}</v-btn>
+              </template>
+              <v-list dense>
+                <v-list-item
+                  v-for="(item, index) in paperSizes"
+                  :key="index"
+                  @click="updatePaperSize(item)">
+                  <v-list-item-title>{{ item.name }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </div>
         </template>
 
         <!--
@@ -623,6 +626,14 @@ export default {
           }
         }
       });
+    },
+
+    setMaxPaperSize() {
+      const deviceSize = {
+        x: this.device.features['-x'].limits[1],
+        y: this.device.features['-y'].limits[1]
+      };
+      updatePaperSize(deviceSize);
     },
 
     updatePaperSize(value) {
