@@ -77,7 +77,7 @@
           item-value="value" />
 
           <div>
-          <v-label>Scan Area (mm)</v-label>
+          <v-label class="text-caption">Scan Area (mm)</v-label>
           <div class="d-flex flex-row flex-wrap">
             <v-text-field v-model="request.params.top" :label="$t('scan.top')" type="number" step="any" @blur="onCoordinatesChange" />
             <v-text-field v-model="request.params.left" :label="$t('scan.left')" type="number" step="any" @blur="onCoordinatesChange" />
