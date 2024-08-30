@@ -3,16 +3,12 @@
       v-model="selectedFiles"
       :headers="headers"
       :items="files"
-      :items-per-page-text="$t('files.items-per-page')"
+      :items-per-page="-1"
+      :hide-default-footer="true"
       return-object
       show-select>
     <template #top>
       <v-toolbar flat>
-        <v-checkbox v-model="thumbnails.show"
-          class="mt-6" :label="$t('files.thumbnail-show')" />
-        <v-slider v-if="thumbnails.show" v-model="thumbnails.size" class="mt-6 ml-8" min="32" max="128"
-          step="16" :inverse-label="true"
-          :label="`${$t('files.thumbnail-size')} (${thumbnails.size})`" />
         <v-spacer />
         <v-btn v-if="!smAndDown" :disabled="selectedFiles.length === 0" color="warning" @click="multipleDelete">
           {{ $t('files.button:delete-selected') }}
@@ -54,7 +50,7 @@
       </v-toolbar>
     </template>
 
-    <template v-if="thumbnails.show" #[`item.thumb`]="{ item }">
+    <template #[`item.thumb`]="{ item }">
       <v-img :src="`api/v1/files/${item.name}/thumbnail`"
         width="128"
         :max-height="thumbnails.size" :max-width="thumbnails.size"
@@ -112,8 +108,7 @@ export default {
       },
       selectedFiles: [],
       thumbnails: {
-        show: storage.settings.thumbnails.show,
-        size: storage.settings.thumbnails.size
+        size: 64,
       },
       actions: []
     };
