@@ -468,11 +468,6 @@ export default {
           this.context = context;
           this.device = context.devices[0];
           this.request = this.buildRequest();
-          for (let test of context.diagnostics) {
-            if (!test.success) {
-              this.notify({ type: 'e', message: test.message });
-            }
-          }
         } else {
           this.notify({ type: 'e', message: this.$t('scan.message:no-devices') });
         }

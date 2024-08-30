@@ -9,15 +9,6 @@ application._userOptions = new UserOptions();
 const config = application.config();
 
 describe('Context', () => {
-  it('missing files', () => {
-    const temp = config.scanimage;
-    config.scanimage = '/x';
-    const context = new Context(config, [], new UserOptions());
-    assert.strictEqual(context.diagnostics.length, 2);
-    assert.strictEqual(context.diagnostics[0].success, false);
-    config.scanimage = temp;
-  });
-
   it('settings:default', () => {
     const device = {
       id: 'test-scanner',

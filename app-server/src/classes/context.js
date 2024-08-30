@@ -1,15 +1,6 @@
 const fs = require('fs');
 const objectMerger = require('./object-merger');
 
-const diagnostic = (path) => {
-  const success = fs.existsSync(path) && !fs.statSync(path).isDirectory();
-  const message = success ? `Found ${path}` : `Unable to find file ${path}`;
-  return {
-    success,
-    message
-  };
-};
-
 module.exports = class Context {
   /**
    * @param {Configuration} config
@@ -52,10 +43,6 @@ module.exports = class Context {
 
     this.devices = devices;
     this.version = config.version;
-    this.diagnostics = [
-      diagnostic(config.scanimage),
-      diagnostic(config.convert)
-    ];
 
     /** @type {PaperSize[]} */
     this.paperSizes = config.paperSizes;
