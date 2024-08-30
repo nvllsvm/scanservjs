@@ -10,6 +10,8 @@ const application = require('./application');
 const config = application.config();
 const scanimageCommand = application.scanimageCommand();
 
+const defaultPreview = FileInfo.create(`${config.previewDirectory}/default.jpg`).toBuffer();
+
 module.exports = new class Api {
 
   /**
@@ -95,9 +97,12 @@ module.exports = new class Api {
     log.trace('readPreview()', filters);
     // The UI relies on this image being the correct aspect ratio. If there is a
     // preview image then just use it.
-    const source = FileInfo.create(`${config.previewDirectory}/preview.jpg`);
-    const buffer = source.toBuffer();
-    return Promise.resolve(buffer);
+    try {
+        const buffer = FileInfo.create(`${config.previewDirectory}/preview.jpg`).toBuffer();
+        return Promise.resolve(buffer);
+    } catch (e) {
+        return Promise.resolve(defaultPreview);
+    }
   }
 
   /**
