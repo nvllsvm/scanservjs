@@ -34,6 +34,19 @@ class ScanController {
     if (this.pipeline === undefined) {
       throw Error('No matching pipeline');
     }
+    switch (this.request.pipeline) {
+        case 'JPG':
+            this.request.params.format = 'jpeg'
+            break;
+        case 'PNG':
+            this.request.params.format = 'png'
+            break;
+        case 'TIFF':
+            this.request.params.format = 'tiff'
+            break;
+        default:
+            throw Error('No matching format');
+    }
 
     this.firstPass = this.request.index === 1;
     this.performScan = this.request.index > 0;
