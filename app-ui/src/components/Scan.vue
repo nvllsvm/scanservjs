@@ -462,8 +462,12 @@ export default {
         cache: 'no-store',
         method: 'GET'
       }).then(data => {
-        this.img = 'data:image/jpeg;base64,' + data.content;
-        this._resizePreview();
+        let newImg = 'data:image/jpeg;base64,' + data.content;
+        // avoid flickering
+        if (newImg != this.img) {
+          this.img = newImg;
+          this._resizePreview();
+        }
       });
     },
 
