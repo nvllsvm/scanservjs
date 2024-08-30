@@ -4,32 +4,27 @@
       <v-spacer />
 
       <v-col cols="12" md="3" class="mb-10 mb-md-0">
-        <v-select v-if="'--source' in device.features"
+        <v-select
           v-model="request.params.source"
           :no-data-text="$t('global.no-data-text')" :label="$t('scan.source')"
           :items="sources" item-value="value" item-title="text" />
 
-        <v-select v-if="'--adf-mode' in device.features"
-          v-model="request.params.adfMode"
-          :no-data-text="$t('global.no-data-text')" :label="$t('scan.adf-mode')"
-          :items="adfModes" item-value="value" item-title="text" />
-
-        <v-select v-if="'--color-correction' in device.features"
+        <v-select
           v-model="request.params.colorCorrection"
           :no-data-text="$t('global.no-data-text')" :label="$t('scan.color-correction')"
           :items="colorCorrections" item-value="value" item-title="text" />
 
-        <v-select v-if="'--color-space' in device.features"
+        <v-select
           v-model="request.params.colorSpace"
           :no-data-text="$t('global.no-data-text')" :label="$t('scan.color-space')"
           :items="device.features['--color-space']['options']" />
 
-        <v-select v-if="'--gamma-correction' in device.features"
+        <v-select
           v-model="request.params.gammaCorrection"
           :no-data-text="$t('global.no-data-text')" :label="$t('scan.gamma-correction')"
           :items="device.features['--gamma-correction']['options']" />
 
-        <v-select v-if="'--depth' in device.features"
+        <v-select
           v-model="request.params.depth"
           :no-data-text="$t('global.no-data-text')" :label="$t('scan.depth')"
           :items="device.features['--depth']['options']" />
@@ -39,18 +34,10 @@
           :no-data-text="$t('global.no-data-text')" :label="$t('scan.resolution')"
           :items="device.features['--resolution']['options']" />
 
-        <v-select v-if="'--mode' in device.features"
+        <v-select
           v-model="request.params.mode"
           :no-data-text="$t('global.no-data-text')" :label="$t('scan.mode')"
           :items="modes" item-value="value" item-title="text" />
-
-        <v-select v-if="'--disable-dynamic-lineart' in device.features"
-          v-model="request.params.mode"
-          :label="$t('scan.dynamic-lineart')"
-          :items="[
-            { value: false, text: $t('scan.dynamic-lineart:disabled') },
-            { value: true, text: $t('scan.dynamic-lineart:enabled') }]"
-          item-value="value" item-title="text" />
 
         <v-select
           v-model="request.pipeline"
@@ -87,16 +74,15 @@
           </div>
         <div class="d-flex flex-row-reverse flex-wrap">
           <v-btn color="blue" class="ml-1 mb-1" @click="scan(1)">{{ $t('scan.btn-scan') }} <v-icon class="ml-2" :icon="mdiCamera" /></v-btn>
-          <v-btn v-if="geometry" color="green" class="ml-1 mb-1" @click="createPreview">{{ $t('scan.btn-preview') }} <v-icon class="ml-2" :icon="mdiMagnify" /></v-btn>
+          <v-btn color="green" class="ml-1 mb-1" @click="createPreview">{{ $t('scan.btn-preview') }} <v-icon class="ml-2" :icon="mdiMagnify" /></v-btn>
           <v-btn color="amber" class="ml-1 mb-1" @click="deletePreview">{{ $t('scan.btn-clear') }} <v-icon class="ml-2" :icon="mdiDelete" /></v-btn>
         </div>
       </v-col>
 
       <v-col cols="12" md="auto" class="mb-10 mb-md-0" :style="{width: `${preview.width}px`}">
-        <cropper v-if="geometry" ref="cropper" :key="preview.key" class="cropper border-lg" :transition-time="10" :wheel-resize="false"
+        <cropper ref="cropper" :key="preview.key" class="cropper border-lg" :transition-time="10" :wheel-resize="false"
             :default-position="cropperDefaultPosition" :default-size="cropperDefaultSize"
             :src="img" @change="onCropperChange" />
-        <v-img v-if="!geometry" :src="img" />
       </v-col>
       <v-spacer />
     </v-row>
@@ -203,18 +189,6 @@ export default {
           return {
             text: this.te(key) ? this.$t(key) : colorCorrection,
             value: colorCorrection
-          };
-        })
-        : undefined;
-    },
-
-    adfModes() {
-      return '--adf-mode' in this.device.features
-        ? this.device.features['--adf-mode'].options.map(adfMode => {
-          const key = `adf-mode.${sanitiseLocaleKey(adfMode)}`;
-          return {
-            text: this.te(key) ? this.$t(key) : adfMode,
-            value: adfMode
           };
         })
         : undefined;
