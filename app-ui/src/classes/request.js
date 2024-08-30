@@ -16,7 +16,6 @@ export default class Request {
         deviceId: device.id,
         resolution: request.params.resolution || device.features['--resolution'].default
       },
-      filters: request.filters || device.settings.filters.default,
       pipeline: request.pipeline || device.settings.pipeline.default
     });
 

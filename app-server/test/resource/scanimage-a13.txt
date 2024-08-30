@@ -16,8 +16,6 @@ All options specific to device `hpaio:/usb/PSC_1600_series?serial=MY4C3C30Z5L0':
     --jpeg-quality 0..100 [10] [advanced]
         Sets the scanner JPEG compression factor. Larger numbers mean better
         compression, and smaller numbers mean better image quality.
-    --batch-scan[=(yes|no)] [no] [advanced]
-        Enables continuous scanning with automatic document feeder (ADF).
     --source Flatbed [Flatbed] [advanced]
         Selects the scan source (such as a document-feeder).
     --duplex[=(yes|no)] [inactive]

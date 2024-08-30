@@ -32,25 +32,6 @@ describe('Context', () => {
     const context = new Context(config, [device], new UserOptions());
     assert.strictEqual(context.devices.length, 1);
     assert.deepStrictEqual(context.devices[0].settings, {
-      batchMode: {
-        options: [
-          'none',
-          'manual',
-          'auto',
-          'auto-collate-standard'
-        ],
-        default: 'none'
-      },
-      filters: {
-        options: [
-          'filter.auto-contrast',
-          'filter.auto-level',
-          'filter.threshold',
-          'filter.blur',
-          'filter.more-contrast'
-        ],
-        default: []
-      },
       pipeline: {
         options: [
           'JPG | @:pipeline.high-quality',
@@ -86,10 +67,6 @@ describe('Context', () => {
     const userOptions = new UserOptions();
     userOptions.afterDevices = (devices) => {
       devices.forEach(device => {
-        device.settings.batchMode.default = 'banana';
-        device.settings.filters.options = [
-          'filter.auto-level'
-        ];
         device.settings.pipeline = {
           options: [
             'JPG | @:pipeline.low-quality'
@@ -102,21 +79,6 @@ describe('Context', () => {
     const context = new Context(config, [device], userOptions);
     assert.strictEqual(context.devices.length, 1);
     assert.deepStrictEqual(context.devices[0].settings, {
-      batchMode: {
-        options: [
-          'none',
-          'manual',
-          'auto',
-          'auto-collate-standard'
-        ],
-        default: 'banana'
-      },
-      filters: {
-        options: [
-          'filter.auto-level'
-        ],
-        default: []
-      },
       pipeline: {
         options: [
           'JPG | @:pipeline.low-quality'
@@ -140,10 +102,6 @@ describe('Context', () => {
     const userOptions = new UserOptions();
     userOptions.afterDevices = (devices) => {
       devices.forEach(device => {
-        device.settings.batchMode.default = 'banana';
-        device.settings.filters.options = [
-          'filter.auto-level'
-        ];
         device.settings.pipeline = {
           options: [
             'JPG | @:pipeline.low-quality'
@@ -161,9 +119,6 @@ describe('Context', () => {
           },
         },
         settings: {
-          batchMode: {
-            default: 'auto'
-          }
         }
       });
     };
@@ -171,21 +126,6 @@ describe('Context', () => {
     const context = new Context(config, [device], userOptions);
     assert.strictEqual(context.devices.length, 2);
     assert.deepStrictEqual(context.devices[0].settings, {
-      batchMode: {
-        options: [
-          'none',
-          'manual',
-          'auto',
-          'auto-collate-standard'
-        ],
-        default: 'banana'
-      },
-      filters: {
-        options: [
-          'filter.auto-level'
-        ],
-        default: []
-      },
       pipeline: {
         options: [
           'JPG | @:pipeline.low-quality'
@@ -195,25 +135,6 @@ describe('Context', () => {
     });
 
     assert.deepStrictEqual(context.devices[1].settings, {
-      batchMode: {
-        options: [
-          'none',
-          'manual',
-          'auto',
-          'auto-collate-standard'
-        ],
-        default: 'auto'
-      },
-      filters: {
-        options: [
-          'filter.auto-contrast',
-          'filter.auto-level',
-          'filter.threshold',
-          'filter.blur',
-          'filter.more-contrast'
-        ],
-        default: []
-      },
       pipeline: {
         options: [
           'JPG | @:pipeline.high-quality',

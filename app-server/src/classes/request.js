@@ -46,11 +46,9 @@ module.exports = class Request {
         format: data.params.format || features['--format'].default,
         isPreview: data.params.isPreview || false
       },
-      filters: data.filters || device.settings.filters.default,
       pipeline: data.pipeline || device.settings.pipeline.default
     });
 
-    assertContains(device.settings['filters'].options, this.filters, 'Invalid filters');
     assertContains(device.settings['pipeline'].options, this.pipeline, 'Invalid pipeline');
 
     if ('-t' in features) {

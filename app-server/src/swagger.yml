@@ -170,19 +170,9 @@ paths:
     get:
       summary: Reads the currently stored preview
       description: |
-        Reads the currently stored preview and applies the supplied filters. The
-        filters are defined in /context.
+        Reads the currently stored preview.
       tags:
         - Files
-      parameters:
-        - name: filter
-          in: query
-          description: Filter array
-          required: false
-          schema:
-            type: array
-            item:
-              type: string
       responses:
         '200':
           description: OK
@@ -385,14 +375,6 @@ definitions:
           "interval": 1
 
       "settings":
-        "filters":
-          "options":
-            - 'filter.auto-level'
-            - 'filter.threshold'
-            - 'filter.blur'
-
-          "default": []
-        
         "pipeline":
           "options":
             - 'JPG | @:pipeline.high-quality'
@@ -519,14 +501,6 @@ definitions:
     properties:
       params:
         $ref: '#/definitions/ScanRequestParameters'
-
-      filters:
-        type: array
-        items:
-          type: string
-        example:
-          - 'filter.auto-level'
-          - 'filter.threshold'
 
       pipeline:
         type: string

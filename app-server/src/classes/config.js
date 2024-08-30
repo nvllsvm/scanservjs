@@ -66,29 +66,6 @@ module.exports = class Config {
         ]
       },
 
-      filters: [
-        {
-          description: 'filter.auto-contrast',
-          params: '-equalize'
-        },
-        {
-          description: 'filter.auto-level',
-          params: '-auto-level'
-        },
-        {
-          description: 'filter.threshold',
-          params: '-channel RGB -threshold 80%'
-        },
-        {
-          description: 'filter.blur',
-          params: '-blur 1'
-        },
-        {
-          description: 'filter.more-contrast',
-          params: '+contrast +contrast +contrast'
-        }
-      ],
-
       paperSizes: [
         { name: 'A3 (@:paper-size.portrait)', dimensions: { x: 297, y: 420 } },
         { name: 'A4 (@:paper-size.portrait)', dimensions: { x: 210, y: 297 } },

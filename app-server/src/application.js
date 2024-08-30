@@ -3,7 +3,6 @@ const Context = require('./classes/context');
 const DeviceIdParser = require('./classes/device-id-parser');
 const Device = require('./classes/device');
 const FileInfo = require('./classes/file-info');
-const FilterBuilder = require('./classes/filter-builder');
 const UserOptions = require('./classes/user-options');
 
 module.exports = new class Application {
@@ -119,9 +118,5 @@ module.exports = new class Application {
   async context() {
     const devices = await this.deviceList();
     return new Context(this.config(), devices, this.userOptions());
-  }
-
-  filterBuilder() {
-    return new FilterBuilder(this.config());
   }
 };

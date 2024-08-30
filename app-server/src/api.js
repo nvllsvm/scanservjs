@@ -90,11 +90,10 @@ module.exports = new class Api {
   }
 
   /**
-   * @param {string[]} filters
    * @returns {Promise.<Buffer>}
    */
-  async readPreview(filters) {
-    log.trace('readPreview()', filters);
+  async readPreview() {
+    log.trace('readPreview()');
     // The UI relies on this image being the correct aspect ratio. If there is a
     // preview image then just use it.
     try {

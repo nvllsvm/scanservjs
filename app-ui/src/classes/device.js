@@ -39,10 +39,6 @@ export default {
         '--disable-dynamic-lineart': {}
       },
       settings: {
-        filters: {
-          options: [],
-          default: []
-        },
         pipeline: {
           options: [],
           default: ''

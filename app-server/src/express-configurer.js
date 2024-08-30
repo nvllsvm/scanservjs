@@ -120,7 +120,7 @@ const EndpointSpecs = [
     method: 'get',
     path: '/api/v1/preview',
     callback: async (req, res) => {
-      const buffer = await api.readPreview(req.query.filter);
+      const buffer = await api.readPreview();
       res.send({
         content: buffer.toString('base64')
       });

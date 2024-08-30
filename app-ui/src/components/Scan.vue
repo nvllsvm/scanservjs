@@ -184,15 +184,6 @@ export default {
       };
     },
 
-    filters() {
-      return this.device.settings.filters.options.map(f => {
-        return {
-          text: this.$t(f),
-          value: f
-        };
-      });
-    },
-
     modes() {
       return '--mode' in this.device.features
         ? this.device.features['--mode'].options.map(mode => {
@@ -498,10 +489,7 @@ export default {
 
     readPreview() {
       // Gets the preview image as a base64 encoded jpg and updates the UI
-      const uri = 'api/v1/preview?' + new URLSearchParams(
-        this.request.filters.map(e => ['filter', e]));
-
-      this._fetch(uri, {
+      this._fetch('api/v1/preview', {
         cache: 'no-store',
         method: 'GET'
       }).then(data => {
@@ -540,7 +528,6 @@ export default {
           this.$router.push('/files');
         } else {
           this.readPreview();
-        }
         }
       });
     },

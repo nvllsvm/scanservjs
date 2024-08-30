@@ -31,10 +31,6 @@ module.exports = class Context {
 
     const defaultSettings = () => {
       return {
-        filters: {
-          options: config.filters.map(f => f.description),
-          default: []
-        },
         pipeline: {
           options: config.pipelines.map(p => p.description),
           default: config.pipelines[0].description
