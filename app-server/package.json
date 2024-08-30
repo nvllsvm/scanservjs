@@ -26,7 +26,6 @@
   "author": "Sam Strachan",
   "license": "GPL-2.0",
   "dependencies": {
-    "adm-zip": "0.5.16",
     "dayjs": "1.11.13",
     "express": "4.19.2",
     "express-basic-auth": "1.2.1",

@@ -109,12 +109,9 @@ module.exports = new class Api {
    * @returns {Promise.<Buffer>}
    */
   async readThumbnail(name) {
-    const source = FileInfo.unsafe(config.outputDirectory, name);
-    if (source.extension !== '.zip') {
-      const thumbnail = FileInfo.unsafe(config.thumbnailDirectory, name);
-      if (thumbnail.exists()) {
-        return thumbnail.toBuffer();
-      }
+    const thumbnail = FileInfo.unsafe(config.thumbnailDirectory, name);
+    if (thumbnail.exists()) {
+      return thumbnail.toBuffer();
     }
     return [];
   }

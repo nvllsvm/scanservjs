@@ -4,7 +4,6 @@ const CommandBuilder = require('./classes/command-builder');
 const FileInfo = require('./classes/file-info');
 const Process = require('./classes/process');
 const Request = require('./classes/request');
-const Zip = require('./classes/zip');
 
 const application = require('./application');
 const userOptions = application.userOptions();
