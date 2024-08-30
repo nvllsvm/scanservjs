@@ -76,6 +76,31 @@
           item-title="text"
           item-value="value" />
 
+          <div>
+          <v-label>Scan Area (mm)</v-label>
+          <div class="d-flex flex-row flex-wrap">
+            <v-text-field v-model="request.params.top" :label="$t('scan.top')" type="number" step="any" @blur="onCoordinatesChange" />
+            <v-text-field v-model="request.params.left" :label="$t('scan.left')" type="number" step="any" @blur="onCoordinatesChange" />
+            <v-text-field v-model="request.params.width" :label="$t('scan.width')" type="number" step="any" @blur="onCoordinatesChange" />
+            <v-text-field v-model="request.params.height" :label="$t('scan.height')" type="number" step="any" @blur="onCoordinatesChange" />
+            <v-menu class="height-screen" offset-y>
+              <template #activator="{ props }">
+                  <v-btn color="grey" class="height-25" v-bind="props"><v-icon :icon="mdiNewspaper" /></v-btn>
+              </template>
+              <v-list dense>
+                <v-list-item
+                  v-for="(item, index) in paperSizes"
+                  :key="index"
+                  @click="updatePaperSize(item)">
+                  <v-list-item-title>{{ item.name }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </div>
+          </div>
+
+          <div class="d-flex flex-row flex-wrap">
+          </div>
         <div class="d-flex flex-row-reverse flex-wrap">
           <v-btn color="blue" class="ml-1 mb-1" @click="scan(1)">{{ $t('scan.btn-scan') }} <v-icon class="ml-2" :icon="mdiCamera" /></v-btn>
           <v-btn v-if="geometry" color="green" class="ml-1 mb-1" @click="createPreview">{{ $t('scan.btn-preview') }} <v-icon class="ml-2" :icon="mdiMagnify" /></v-btn>
@@ -89,59 +114,6 @@
             :src="img" @change="onCropperChange" />
         <v-img v-if="!geometry" :src="img" />
       </v-col>
-
-      <v-col cols="12" md="3" class="mb-10 mb-md-0">
-        <template v-if="geometry">
-          <v-text-field v-model="request.params.top" :label="$t('scan.top')" type="number" step="any" @blur="onCoordinatesChange" />
-          <v-text-field v-model="request.params.left" :label="$t('scan.left')" type="number" step="any" @blur="onCoordinatesChange" />
-          <v-text-field v-model="request.params.width" :label="$t('scan.width')" type="number" step="any" @blur="onCoordinatesChange" />
-          <v-text-field v-model="request.params.height" :label="$t('scan.height')" type="number" step="any" @blur="onCoordinatesChange" />
-
-          <div class="d-flex flex-row-reverse flex-wrap">
-            <v-btn color="red" class="ml-1 mb-1" @click="setMaxPaperSize">{{ $t('scan.paperSize-reset') }}</v-btn>
-            <v-menu offset-y>
-              <template #activator="{ props }">
-                <v-btn color="primary" class="mb-4" v-bind="props">{{ $t('scan.paperSize') }}</v-btn>
-              </template>
-              <v-list dense>
-                <v-list-item
-                  v-for="(item, index) in paperSizes"
-                  :key="index"
-                  @click="updatePaperSize(item)">
-                  <v-list-item-title>{{ item.name }}</v-list-item-title>
-                </v-list-item>
-              </v-list>
-            </v-menu>
-          </div>
-        </template>
-
-        <!--
-        <template v-if="'--brightness' in device.features">
-          <v-slider v-model="request.params.brightness" class="align-center ml-0"
-            :step="device.features['--brightness']['interval']"
-            :min="device.features['--brightness']['limits'][0]"
-            :max="device.features['--brightness']['limits'][1]">
-            <template #prepend>
-              <v-text-field v-model="request.params.brightness" 
-                :label="$t('scan.brightness')" style="width: 60px" type="number" />
-            </template>
-          </v-slider>
-        </template>
-
-        <div v-if="'--contrast' in device.features">
-          <v-slider v-model="request.params.contrast" class="align-center ml-0"
-            :step="device.features['--contrast']['interval']"
-            :min="device.features['--contrast']['limits'][0]"
-            :max="device.features['--contrast']['limits'][1]">
-            <template #prepend>
-              <v-text-field v-model="request.params.contrast" 
-                :label="$t('scan.contrast')" style="width: 60px" type="number" />
-            </template>
-          </v-slider>
-        </div>
-        -->
-      </v-col>
-      
       <v-spacer />
     </v-row>
 
@@ -150,7 +122,7 @@
 </template>
 
 <script>
-import { mdiCamera, mdiDelete, mdiMagnify, mdiRefresh } from '@mdi/js';
+import { mdiCamera, mdiDelete, mdiNewspaper, mdiMagnify, mdiRefresh } from '@mdi/js';
 import { Cropper } from 'vue-advanced-cropper';
 import { useI18n } from 'vue-i18n';
 import BatchDialog from './BatchDialog.vue';
@@ -189,6 +161,7 @@ export default {
     return {
       mdiCamera,
       mdiDelete,
+      mdiNewspaper,
       mdiMagnify,
       mdiRefresh,
       te
@@ -297,7 +270,8 @@ export default {
         y: this.device.features['-y'].limits[1]
       };
 
-      return this.context.paperSizes
+      const allSizes = [{name: 'Maximum', dimensions: {x: deviceSize.x, y: deviceSize.y}}]
+      const paperSizes = this.context.paperSizes
         .filter(paper => paper.dimensions.x <= deviceSize.x && paper.dimensions.y <= deviceSize.y)
         .map(paper => {
           const variables = (paper.name.match(/@:[a-z-.]+/ig) || []).map(s => s.substr(2));
@@ -306,6 +280,9 @@ export default {
           });
           return paper;
         });
+      allSizes.push(...paperSizes);
+      return allSizes;
+       
     },
 
     pipelines() {
@@ -628,20 +605,18 @@ export default {
       });
     },
 
-    setMaxPaperSize() {
-      const deviceSize = {
-        x: this.device.features['-x'].limits[1],
-        y: this.device.features['-y'].limits[1]
-      };
-      updatePaperSize(deviceSize);
-    },
-
     updatePaperSize(value) {
       if (value.dimensions) {
         this.request.params.width = value.dimensions.x;
         this.request.params.height = value.dimensions.y;
         this.onCoordinatesChange();
       }
+    }, 
+
+    resetPaperSize() {
+      this.request.params.width = this.device.features['-x'].limits[1];
+      this.request.params.height = this.device.features['-y'].limits[1];
+      this.onCoordinatesChange();
     }
   }
 };

@@ -173,6 +173,7 @@
     "width": "Width",
     "height": "Height",
     "paperSize": "Paper size",
+    "paperSize:reset": "Reset",
     "brightness": "Brightness",
     "contrast": "Contrast",
     "message:loading-devices": "Loading devices...",
