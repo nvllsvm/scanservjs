@@ -52,22 +52,6 @@
             { value: true, text: $t('scan.dynamic-lineart:enabled') }]"
           item-value="value" item-title="text" />
 
-        <!--
-        <v-select v-model="request.batch" :label="$t('scan.batch')"
-          :no-data-text="$t('global.no-data-text')"
-          :items="batchModes" item-value="value" item-title="text" />
-
-        <v-select
-          v-model="request.filters"
-          :no-data-text="$t('global.no-data-text')"
-          :items="filters"
-          item-title="text"
-          item-value="value"
-          :label="$t('scan.filters')"
-          multiple
-          @update:model-value="readPreview" />
-        -->
-
         <v-select
           v-model="request.pipeline"
           :no-data-text="$t('global.no-data-text')"
@@ -116,8 +100,6 @@
       </v-col>
       <v-spacer />
     </v-row>
-
-    <batch-dialog ref="batchDialog" />
   </div>
 </template>
 
@@ -125,7 +107,6 @@
 import { mdiCamera, mdiDelete, mdiNewspaper, mdiMagnify, mdiRefresh } from '@mdi/js';
 import { Cropper } from 'vue-advanced-cropper';
 import { useI18n } from 'vue-i18n';
-import BatchDialog from './BatchDialog.vue';
 
 import Common from '../classes/common';
 import Device from '../classes/device';
@@ -151,7 +132,6 @@ export default {
 
   components: {
     Cropper,
-    BatchDialog
   },
 
   emits: ['mask', 'notify'],
@@ -202,17 +182,6 @@ export default {
         width: this.device.features['-x'].limits[1],
         height: this.device.features['-y'].limits[1]
       };
-    },
-
-    batchModes() {
-      return this.device.settings.batchMode.options.map(mode => {
-        const key = `batch-mode.${sanitiseLocaleKey(mode)}`;
-        let translation = this.$t(key);
-        return {
-          text: translation === key ? mode : translation,
-          value: mode
-        };
-      });
     },
 
     filters() {
@@ -557,11 +526,7 @@ export default {
       this.request = this.buildRequest();
     },
 
-    scan(index) {
-      if (index !== undefined) {
-        this.request.index = index;
-      }
-
+    scan() {
       const data = Common.clone(this.request);
       this._fetch('api/v1/scan', {
         method: 'POST',
@@ -571,36 +536,11 @@ export default {
           'Content-Type': 'application/json'
         }
       }).then((response) => {
-        if (response && 'index' in response) {
-          const options = {
-            message: this.$t('scan.message:turn-documents'),
-            onFinish: () => {
-            },
-            onNext: () => {
-              this.request.index = response.index + 1;
-              this.scan();
-            }
-          };
-          if (response.image) {
-            options.message = `${this.$t('scan.message:preview-of-page')} ${response.index}`;
-            options.image = response.image;
-            options.onFinish = () => {
-              this.request.index = -1;
-              this.scan();
-            };
-            options.onRescan = () => {
-              this.request.index = response.index;
-              this.scan();
-            };
-          }
-          this.$refs.batchDialog.open(options);
+        if (storage.settings.showFilesAfterScan) {
+          this.$router.push('/files');
         } else {
-          // Finish
-          if (storage.settings.showFilesAfterScan) {
-            this.$router.push('/files');
-          } else {
-            this.readPreview();
-          }
+          this.readPreview();
+        }
         }
       });
     },

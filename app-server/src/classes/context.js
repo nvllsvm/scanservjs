@@ -31,10 +31,6 @@ module.exports = class Context {
 
     const defaultSettings = () => {
       return {
-        batchMode: {
-          options: config.batchModes,
-          default: config.batchModes[0]
-        },
         filters: {
           options: config.filters.map(f => f.description),
           default: []

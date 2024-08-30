@@ -17,9 +17,7 @@ export default class Request {
         resolution: request.params.resolution || device.features['--resolution'].default
       },
       filters: request.filters || device.settings.filters.default,
-      pipeline: request.pipeline || device.settings.pipeline.default,
-      batch: request.batch || device.settings.batchMode.default,
-      index: 1
+      pipeline: request.pipeline || device.settings.pipeline.default
     });
 
     if ('-x' in device.features) {

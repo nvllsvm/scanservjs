@@ -1,6 +1,5 @@
 const log = require('loglevel').getLogger('ScanController');
 const Constants = require('./constants');
-const Collator = require('./classes/collator');
 const CommandBuilder = require('./classes/command-builder');
 const FileInfo = require('./classes/file-info');
 const Process = require('./classes/process');
@@ -47,13 +46,6 @@ class ScanController {
         default:
             throw Error('No matching format');
     }
-
-    this.firstPass = this.request.index === 1;
-    this.performScan = this.request.index > 0;
-    this.finishUp = [Constants.BATCH_AUTO, Constants.BATCH_NONE].includes(this.request.batch)
-      || (this.request.batch === Constants.BATCH_MANUAL && this.request.index < 0)
-      || (this.request.batch === Constants.BATCH_COLLATE_STANDARD && this.request.index === 2)
-      || (this.request.batch === Constants.BATCH_COLLATE_REVERSE && this.request.index === 2);
   }
 
   /**
@@ -77,30 +69,6 @@ class ScanController {
   async scan() {
     log.info('Scanning');
     await Process.spawn(scanimageCommand.scan(this.request));
-  }
-
-  /**
-   * @returns {Promise.<FileInfo>}
-   */
-  async finish() {
-    let files = await this.listFiles();
-    let filename = files[0].name;
-    const destination = `${config.outputDirectory}/${filename}`;
-
-    await this.deleteFiles();
-
-    const fileInfo = FileInfo.create(destination);
-    return fileInfo;
-  }
-
-  /**
-   * @returns {Promise.<Buffer>}
-   */
-  async imageAsBuffer() {
-    const filepath = scanimageCommand.filename(this.request.index);
-    let buffer = FileInfo.create(filepath).toBuffer();
-    buffer = await Process.chain(config.previewPipeline.commands, buffer, { ignoreErrors: true });
-    return buffer;
   }
 
   /**
@@ -140,30 +108,18 @@ class ScanController {
   async execute(req) {
     await this.init(req);
 
-    if (this.firstPass) {
-      await this.deleteFiles();
-    }
+    await this.deleteFiles();
 
-    if (this.performScan) {
-      await this.scan();
-    }
+    await this.scan();
 
-    if (this.finishUp) {
-      const file = await this.finish();
-      await userOptions.afterScan(file);
-      return {
-        file
-      };
+    let files = await this.listFiles();
+    let filename = files[0].name;
+    const destination = `${config.outputDirectory}/${filename}`;
 
-    } else {
-      log.info(`Finished pass: ${this.request.index}`);
-      /** @type {ScanResponse} */
-      const response = { index: this.request.index };
-      if (this.request.batch === Constants.BATCH_MANUAL) {
-        response.image = (await this.imageAsBuffer()).toString('base64');
-      }
-      return response;
-    }
+    await this.deleteFiles();
+
+    const fileInfo = FileInfo.create(destination);
+    return { fileInfo };
   }
 }
 

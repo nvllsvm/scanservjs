@@ -385,15 +385,6 @@ definitions:
           "interval": 1
 
       "settings":
-        "batchMode":
-          "options":
-            - 'none'
-            - 'manual'
-            - 'auto'
-            - 'auto-collate-standard'
-          
-          "default": 'none'
-        
         "filters":
           "options":
             - 'filter.auto-level'
@@ -540,14 +531,6 @@ definitions:
       pipeline:
         type: string
         example: 'JPG | @:pipeline.high-quality'
-
-      batch:
-        type: string
-        example: 'none'
-
-      index:
-        type: integer
-        example: 0
     
     required:
       - params
@@ -558,8 +541,5 @@ definitions:
       image:
         type: string
         example: 
-      index:
-        type: integer
-        example: 1
       file:
         $ref: '#/definitions/FileInfo'

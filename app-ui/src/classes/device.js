@@ -39,10 +39,6 @@ export default {
         '--disable-dynamic-lineart': {}
       },
       settings: {
-        batchMode: {
-          options: [],
-          default: ''
-        },
         filters: {
           options: [],
           default: []

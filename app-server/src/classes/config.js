@@ -66,13 +66,6 @@ module.exports = class Config {
         ]
       },
 
-      batchModes: [
-        Constants.BATCH_NONE,
-        Constants.BATCH_MANUAL,
-        Constants.BATCH_AUTO,
-        Constants.BATCH_COLLATE_STANDARD
-      ],
-
       filters: [
         {
           description: 'filter.auto-contrast',

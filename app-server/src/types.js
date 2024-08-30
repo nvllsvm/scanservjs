@@ -79,7 +79,6 @@
  * @property {Filter[]} filters
  * @property {Pipeline[]} pipelines
  * @property {PaperSize[]} paperSizes
- * @property {string[]} batchModes
  */
 
 /**
@@ -103,14 +102,11 @@
  * @property {ScanRequestParameters} params
  * @property {string[]} filters
  * @property {string} pipeline
- * @property {string} batch
- * @property {number} index
  */
 
 /**
  * @typedef {Object} ScanResponse
  * @property {string} [image]
- * @property {number} [index]
  * @property {FileInfo} [file]
  */
 

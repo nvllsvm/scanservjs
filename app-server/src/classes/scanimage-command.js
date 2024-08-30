@@ -43,15 +43,6 @@ module.exports = class ScanimageCommand {
   }
 
   /**
-   * @param {number} page
-   * @returns {string}
-   */
-  filename(page) {
-    const number = `000${page}`.slice(-4);
-    return `${this.config.tempDirectory}/${Constants.TEMP_FILESTEM}-0-${number}.tif`;
-  }
-
-  /**
    * @param {ScanRequest} request
    * @returns {string}
    */
@@ -118,15 +109,10 @@ module.exports = class ScanimageCommand {
     if (params.mode === 'Lineart' && params.dynamicLineart === false) {
       cmdBuilder.arg('--disable-dynamic-lineart=yes');
     }
-    if ([Constants.BATCH_AUTO, Constants.BATCH_COLLATE_STANDARD, Constants.BATCH_COLLATE_REVERSE].includes(request.batch)) {
-      const pattern = `${this.config.tempDirectory}/${Constants.TEMP_FILESTEM}-${request.index}-%04d.tif`;
-      cmdBuilder.argPair('--batch', pattern);
+    if ('isPreview' in params && params.isPreview) {
+      cmdBuilder.arg('--preview')
     } else {
-      if ('isPreview' in params && params.isPreview) {
-        cmdBuilder.arg('--preview')
-      } else {
-        cmdBuilder.arg('-o', this.filename(request.index));
-      }
+      cmdBuilder.arg('-o', 'TODO_fixme.tif');
     }
     return cmdBuilder.build();
   }
