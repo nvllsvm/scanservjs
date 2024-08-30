@@ -59,14 +59,6 @@ function formatForLog(req) {
  */
 const EndpointSpecs = [
   {
-    method: 'delete',
-    path: '/api/v1/context',
-    callback: async (req, res) => {
-      api.deleteContext();
-      res.send({});
-    }
-  },
-  {
     method: 'get',
     path: '/api/v1/context',
     callback: async (req, res) => res.send(await api.readContext())

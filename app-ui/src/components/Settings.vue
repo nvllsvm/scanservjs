@@ -24,14 +24,6 @@
             </div>
           </template>
         </settings-item>
-        <settings-item>
-          <template #description>
-            {{ $t('settings.clear-storage:description') }}
-          </template>
-          <template #action>
-            <v-btn color="warning" class="ml-1 mb-1" @click="reset">{{ $t('settings.clear-storage') }} <v-icon class="ml-2" :icon="mdiDelete" /></v-btn>
-          </template>
-        </settings-item>
       </template>
     </settings-section>
 
@@ -121,18 +113,6 @@ export default {
 
     reload() {
       location.href = `?anticache=${Date.now()}${location.hash}`;
-    },
-
-    reset() {
-      this.$emit('mask', 1);
-      Common.fetch('api/v1/context', {
-        method: 'DELETE'
-      }).then(() => {
-        this.$emit('mask', -1);
-      }).catch(error => {
-        this.$emit('notify', { type: 'e', message: error });
-        this.$emit('mask', -1);
-      });
     }
   }
 };

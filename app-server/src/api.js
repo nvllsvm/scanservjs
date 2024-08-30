@@ -129,14 +129,6 @@ module.exports = new class Api {
   }
 
   /**
-   * @returns {void}
-   */
-  deleteContext() {
-    application.deviceReset();
-    this.deletePreview();
-  }
-
-  /**
    * @returns {Promise.<Context>}
    */
   async readContext() {

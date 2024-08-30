@@ -1,20 +1,5 @@
 paths:
   /api/v1/context:
-    delete:
-      summary: Deletes cached context
-      description: |
-        Deletes cached context data, such as previously found scanners, which
-        forces a repopulation of the context on the nest GET
-      tags:
-        - System
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-
     get:
       summary: Gets scanner and configuration context
       description: |

@@ -115,16 +115,6 @@ module.exports = new class Application {
   }
 
   /**
-   * @returns {void}
-   */
-  deviceReset() {
-    const file = FileInfo.create(this.config().devicesPath);
-    if (file.exists()) {
-      file.delete();
-    }
-  }
-
-  /**
    * @returns {Promise.<Context>}
    */
   async context() {
