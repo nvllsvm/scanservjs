@@ -303,8 +303,9 @@ export default {
     createPreview() {
       this.mask(1);
 
+      // TODO: enable the timer when the backend gradually updates active scan
       // Keep reloading the preview image
-      const timer = window.setInterval(this.readPreview, 1000);
+      //const timer = window.setInterval(this.readPreview, 1000);
 
       let data = Common.clone(this.request);
 
@@ -316,11 +317,13 @@ export default {
           'Content-Type': 'application/json'
         }
       }).then(() => {
-        window.clearInterval(timer);
+        /*
+         *window.clearInterval(timer);
 
         // Some scanners don't create the preview until after the scan has finished.
         // Run preview one last time
-        window.setTimeout(this.readPreview, 1000);
+         * window.setTimeout(this.readPreview, 1000);
+         */
         this.mask(-1);
       }).catch(() => {
         this.mask(-1);
