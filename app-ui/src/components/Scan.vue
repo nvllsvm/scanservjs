@@ -787,13 +787,7 @@ export default {
           'Content-Type': 'application/json'
         }
       }).then(() => {
-        /*
-         *window.clearInterval(timer);
-
-        // Some scanners don't create the preview until after the scan has finished.
-        // Run preview one last time
-         * window.setTimeout(this.readPreview, 1000);
-         */
+         this.readPreview();
         this.mask(-1);
       }).catch(() => {
         this.mask(-1);
@@ -908,12 +902,8 @@ export default {
         cache: 'no-store',
         method: 'GET'
       }).then(data => {
-        let newImg = 'data:image/jpeg;base64,' + data.content;
-        // avoid flickering
-        if (newImg != this.img) {
-          this.img = newImg;
-          this._resizePreview();
-        }
+        this.img = 'data:image/jpeg;base64,' + data.content;
+        this._resizePreview();
       });
     },
 
