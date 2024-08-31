@@ -103,6 +103,483 @@ import 'vue-advanced-cropper/dist/style.css';
 
 const storage = Storage.instance();
 
+// TODO: remove
+const context = {
+    "devices": [
+      {
+        "id": "EpsonPerfectionV600",
+        "name": "EpsonPerfectionV600",
+        "features": {
+          "--mode": {
+            "text": "--mode Binary|Gray|Color [Color]",
+            "name": "--mode",
+            "default": "Color",
+            "parameters": "Binary|Gray|Color",
+            "enabled": true,
+            "options": [
+              "Binary",
+              "Gray",
+              "Color"
+            ]
+          },
+          "--depth": {
+            "text": "--depth 8|16 [8]",
+            "name": "--depth",
+            "default": "8",
+            "parameters": "8|16",
+            "enabled": true,
+            "options": [
+              "8",
+              "16"
+            ]
+          },
+          "--gamma-correction": {
+            "text": "--gamma-correction User defined (Gamma=1.0)|User defined (Gamma=1.8) [User defined (Gamma=1.8)]",
+            "name": "--gamma-correction",
+            "default": "2.2",
+            "parameters": "User defined (Gamma=1.0)|User defined (Gamma=1.8)",
+            "enabled": true,
+            "options": [
+              "1.0",
+              "1.8",
+              "2.0",
+              "2.2",
+              "2.4",
+              "2.8"
+            ]
+          },
+          "--resolution": {
+            "text": "--resolution 200|400|800|1600|3200|6400dpi [400]",
+            "name": "--resolution",
+            "default": 400,
+            "parameters": "200|400|800|1600|3200|6400dpi",
+            "enabled": true,
+            "options": [
+              200,
+              400,
+              800,
+              1600,
+              3200,
+              6400
+            ]
+          },
+          "--x-resolution": {
+            "text": "--x-resolution 200|400|600|800|1200|1600|3200|6400dpi [200] [advanced]",
+            "name": "--x-resolution",
+            "default": "200",
+            "parameters": "200|400|600|800|1200|1600|3200|6400dpi",
+            "meta": "advanced",
+            "enabled": true
+          },
+          "--y-resolution": {
+            "text": "--y-resolution 200|240|320|400|600|800|1200|1600|3200|4800|6400dpi [320] [advanced]",
+            "name": "--y-resolution",
+            "default": "320",
+            "parameters": "200|240|320|400|600|800|1200|1600|3200|4800|6400dpi",
+            "meta": "advanced",
+            "enabled": true
+          },
+          "--speed": {
+            "text": "--speed[=(yes|no)] [no]",
+            "name": "--speed",
+            "default": "no",
+            "parameters": "[=(yes|no)]",
+            "enabled": true
+          },
+          "--short-resolution": {
+            "text": "--short-resolution[=(yes|no)] [no]",
+            "name": "--short-resolution",
+            "default": "no",
+            "parameters": "[=(yes|no)]",
+            "enabled": true
+          },
+          "--wait-for-button": {
+            "text": "--wait-for-button[=(yes|no)] [no] [advanced]",
+            "name": "--wait-for-button",
+            "default": "no",
+            "parameters": "[=(yes|no)]",
+            "meta": "advanced",
+            "enabled": true
+          },
+          "--cct-1": {
+            "text": "--cct-1 -2..2 [1.2578] [advanced]",
+            "name": "--cct-1",
+            "default": "1.2578",
+            "parameters": "-2..2",
+            "meta": "advanced",
+            "enabled": false
+          },
+          "--cct-2": {
+            "text": "--cct-2 -2..2 [-0.213989] [advanced]",
+            "name": "--cct-2",
+            "default": "-0.213989",
+            "parameters": "-2..2",
+            "meta": "advanced",
+            "enabled": false
+          },
+          "--cct-3": {
+            "text": "--cct-3 -2..2 [-0.0437927] [advanced]",
+            "name": "--cct-3",
+            "default": "-0.0437927",
+            "parameters": "-2..2",
+            "meta": "advanced",
+            "enabled": false
+          },
+          "--cct-4": {
+            "text": "--cct-4 -2..2 [-0.193893] [advanced]",
+            "name": "--cct-4",
+            "default": "-0.193893",
+            "parameters": "-2..2",
+            "meta": "advanced",
+            "enabled": false
+          },
+          "--cct-5": {
+            "text": "--cct-5 -2..2 [1.2856] [advanced]",
+            "name": "--cct-5",
+            "default": "1.2856",
+            "parameters": "-2..2",
+            "meta": "advanced",
+            "enabled": false
+          },
+          "--cct-6": {
+            "text": "--cct-6 -2..2 [-0.0916901] [advanced]",
+            "name": "--cct-6",
+            "default": "-0.0916901",
+            "parameters": "-2..2",
+            "meta": "advanced",
+            "enabled": false
+          },
+          "--cct-7": {
+            "text": "--cct-7 -2..2 [-0.0257874] [advanced]",
+            "name": "--cct-7",
+            "default": "-0.0257874",
+            "parameters": "-2..2",
+            "meta": "advanced",
+            "enabled": false
+          },
+          "--cct-8": {
+            "text": "--cct-8 -2..2 [-0.264191] [advanced]",
+            "name": "--cct-8",
+            "default": "-0.264191",
+            "parameters": "-2..2",
+            "meta": "advanced",
+            "enabled": false
+          },
+          "--cct-9": {
+            "text": "--cct-9 -2..2 [1.28999] [advanced]",
+            "name": "--cct-9",
+            "default": "1.28999",
+            "parameters": "-2..2",
+            "meta": "advanced",
+            "enabled": false
+          },
+          "--preview": {
+            "text": "--preview[=(yes|no)] [no]",
+            "name": "--preview",
+            "default": "no",
+            "parameters": "[=(yes|no)]",
+            "enabled": true
+          },
+          "--preview-speed": {
+            "text": "--preview-speed[=(yes|no)] [no]",
+            "name": "--preview-speed",
+            "default": "no",
+            "parameters": "[=(yes|no)]",
+            "enabled": true
+          },
+          "--scan-area": {
+            "text": "--scan-area Maximum|A4|A5 Landscape|A5 Portrait|B5|Letter|Executive|CD [Maximum]",
+            "name": "--scan-area",
+            "default": "Maximum",
+            "parameters": "Maximum|A4|A5 Landscape|A5 Portrait|B5|Letter|Executive|CD",
+            "enabled": true
+          },
+          "-l": {
+            "text": "-l 0..215.9mm [0]",
+            "name": "-l",
+            "default": 0,
+            "parameters": "0..215.9mm",
+            "enabled": true,
+            "limits": [
+              0,
+              215.9
+            ],
+            "interval": 1
+          },
+          "-t": {
+            "text": "-t 0..297.18mm [0]",
+            "name": "-t",
+            "default": 0,
+            "parameters": "0..297.18mm",
+            "enabled": true,
+            "limits": [
+              0,
+              297.1
+            ],
+            "interval": 1
+          },
+          "-x": {
+            "text": "-x 0..215.9mm [215.9]",
+            "name": "-x",
+            "default": 215.9,
+            "parameters": "0..215.9mm",
+            "enabled": true,
+            "limits": [
+              0,
+              215.9
+            ],
+            "interval": 1
+          },
+          "-y": {
+            "text": "-y 0..297.18mm [297.18]",
+            "name": "-y",
+            "default": 297.1,
+            "parameters": "0..297.18mm",
+            "enabled": true,
+            "limits": [
+              0,
+              297.1
+            ],
+            "interval": 1
+          },
+          "--quick-format": {
+            "text": "--quick-format Maximum|A4|A5 Landscape|A5 Portrait|B5|Letter|Executive|CD [Maximum]",
+            "name": "--quick-format",
+            "default": "Maximum",
+            "parameters": "Maximum|A4|A5 Landscape|A5 Portrait|B5|Letter|Executive|CD",
+            "enabled": true
+          },
+          "--source": {
+            "text": "--source Flatbed|Transparency Unit [Flatbed]",
+            "name": "--source",
+            "default": "Flatbed",
+            "parameters": "Flatbed|Transparency Unit",
+            "enabled": true,
+            "options": [
+              "Flatbed",
+              "Transparency Unit"
+            ]
+          },
+          "--format": {
+            "text": "--format jpeg|png|tiff [tiff]",
+            "name": "--format",
+            "default": "tiff",
+            "parameters": "jpeg|png|tiff",
+            "enabled": true
+          },
+          "--color-correction": {
+            "text": "--color-correction[=(yes|no)] [yes]",
+            "name": "--color-correction",
+            "default": "yes",
+            "parameters": "[=(yes|no)]",
+            "enabled": true,
+            "options": [
+              "yes",
+              "no"
+            ]
+          },
+          "--color-space": {
+            "text": "--color-space None|A|B [None]",
+            "name": "--color-space",
+            "default": "sRGB IEC61966-2.1",
+            "parameters": "None|A|B",
+            "enabled": true,
+            "options": [
+              "None",
+              "Adobe RGB (1998)",
+              "EPSON sRGB",
+              "sRGB IEC61966-2.1"
+            ]
+          }
+        },
+        "string": "\nAll options specific to device `EpsonPerfectionV600':\n    --mode Binary|Gray|Color [Color]\n        Selects the scan mode (e.g., lineart, monochrome, or color).\n    --depth 8|16 [8]\n        Number of bits per sample, typical values are 1 for \"line-art\" and 8\n        for multibit scans.\n    --halftoning None|Halftone A (Hard Tone)|Halftone B (Soft Tone)|Halftone C (Net Screen) [inactive]\n        Selects the halftone.\n    --dropout None|Red|Green|Blue [inactive]\n        Selects the dropout.\n    --sharpness -2..2 [inactive]\n        \n    --gamma-correction User defined (Gamma=1.0)|User defined (Gamma=1.8) [User defined (Gamma=1.8)]\n        Selects the gamma correction value from a list of pre-defined devices\n        or the user defined table, which can be downloaded to the scanner\n    --color-correction User defined [inactive]\n        Sets the color correction table for the selected output device.\n    --resolution 200|400|800|1600|3200|6400dpi [400]\n        Sets the resolution of the scanned image.\n    --x-resolution 200|400|600|800|1200|1600|3200|6400dpi [200] [advanced]\n        Sets the horizontal resolution of the scanned image.\n    --y-resolution 200|240|320|400|600|800|1200|1600|3200|4800|6400dpi [320] [advanced]\n        Sets the vertical resolution of the scanned image.\n    --threshold 0..255 [inactive]\n        Select minimum-brightness to get a white point\n    --mirror[=(yes|no)] [inactive]\n        Mirror the image.\n    --speed[=(yes|no)] [no]\n        Determines the speed at which the scan proceeds.\n    --auto-area-segmentation[=(yes|no)] [inactive]\n        \n    --short-resolution[=(yes|no)] [no]\n        Display short resolution list\n    --zoom 50..200 [inactive]\n        Defines the zoom factor the scanner will use\n    --red-gamma-table 0..255,...\n        Gamma-correction table for the red band.\n    --green-gamma-table 0..255,...\n        Gamma-correction table for the green band.\n    --blue-gamma-table 0..255,...\n        Gamma-correction table for the blue band.\n    --wait-for-button[=(yes|no)] [no] [advanced]\n        After sending the scan command, wait until the button on the scanner\n        is pressed to actually start the scan process.\n    --monitor-button[=(yes|no)] [no] [read-only]\n        Indicates whether a button on the scanner has been pressed.\n    --polling-time <int> [1000000] [read-only]\n        Time between queries when waiting for device state changes.\n    --needs-polling[=(yes|no)] [no] [read-only]\n        Indicates whether the scanner needs to poll.\n    --cct-1 -2..2 [1.2578] [advanced]\n        Controls red level\n    --cct-2 -2..2 [-0.213989] [advanced]\n        Adds to red based on green level\n    --cct-3 -2..2 [-0.0437927] [advanced]\n        Adds to red based on blue level\n    --cct-4 -2..2 [-0.193893] [advanced]\n        Adds to green based on red level\n    --cct-5 -2..2 [1.2856] [advanced]\n        Controls green level\n    --cct-6 -2..2 [-0.0916901] [advanced]\n        Adds to green based on blue level\n    --cct-7 -2..2 [-0.0257874] [advanced]\n        Adds to blue based on red level\n    --cct-8 -2..2 [-0.264191] [advanced]\n        Adds to blue based on green level\n    --cct-9 -2..2 [1.28999] [advanced]\n        Control blue level\n    --preview[=(yes|no)] [no]\n        Request a preview-quality scan.\n    --preview-speed[=(yes|no)] [no]\n        \n    --scan-area Maximum|A4|A5 Landscape|A5 Portrait|B5|Letter|Executive|CD [Maximum]\n        Select an area to scan based on well-known media sizes.\n    -l 0..215.9mm [0]\n        Top-left x position of scan area.\n    -t 0..297.18mm [0]\n        Top-left y position of scan area.\n    -x 0..215.9mm [215.9]\n        Width of scan-area.\n    -y 0..297.18mm [297.18]\n        Height of scan-area.\n    --quick-format Maximum|A4|A5 Landscape|A5 Portrait|B5|Letter|Executive|CD [Maximum]\n        Select an area to scan based on well-known media sizes. (DEPRECATED)\n    --source Flatbed|Transparency Unit [Flatbed]\n        Selects the scan source (such as a document-feeder).\n    --auto-eject[=(yes|no)] [inactive]\n        Eject document after scanning\n    --film-type Positive Film|Negative Film [inactive]\n        \n    --focus-position Focus on glass|Focus 2.5mm above glass [inactive]\n        Sets the focus position to either the glass or 2.5mm above the glass\n    --bay  1 | 2 | 3 | 4 | 5 | 6  [inactive]\n        Select bay to scan\n    --eject [inactive]\n        Eject the sheet in the ADF\n    --adf-mode Simplex|Duplex [inactive]\n        Selects the ADF mode (simplex/duplex)\n    --detect-doc-size[=(yes|no)] [inactive]\n        Activates document size auto-detection.  The scan area will be set to\n        match the detected document size.\n    --scan-area-is-valid[=(yes|no)] [yes] [read-only]\n        Indicates whether the current scan area settings are valid.\n    --adf-auto-scan[=(yes|no)] [inactive]\n        Skips per sheet device setup for faster throughput.\n    --double-feed-detection-sensitivity None|Low|High [inactive]\n        Sets the sensitivity with which multi-sheet page feeds are detected\n        and reported as errors.\n    --ext-sane-status 0..2 [0] [read-only]\n        Ugly kludge to provide additional status message strings to a\n        frontend.\n    --adf-duplex-direction-matches[=(yes|no)] [inactive]\n        Indicates whether the device's ADF duplex mode, if available, scans in\n        the same direction for the front and back.\n    --deskew[=(yes|no)] [inactive]\n        Rotate image so it appears upright.\n    --autocrop[=(yes|no)] [inactive]\n        Determines empty margins in the scanned image and removes them.  This\n        normally reduces the image to the size of the original document but may\n        remove more.\n    --calibrate [inactive]\n        Performs color matching to make sure that the document's color tones\n        are scanned correctly.\n    --clean [inactive]\n        Cleans the scanners reading section.\n\n",
+        "settings": {
+          "pipeline": {
+            "options": [
+              "JPG",
+              "PNG",
+              "TIF"
+            ],
+            "default": "JPG"
+          }
+        }
+      }
+    ],
+    "version": "3.0.3",
+    "paperSizes": [
+      {
+        "name": "A3 (@:paper-size.portrait)",
+        "dimensions": {
+          "x": 297,
+          "y": 420
+        }
+      },
+      {
+        "name": "A4 (@:paper-size.portrait)",
+        "dimensions": {
+          "x": 210,
+          "y": 297
+        }
+      },
+      {
+        "name": "A5 (@:paper-size.portrait)",
+        "dimensions": {
+          "x": 148,
+          "y": 210
+        }
+      },
+      {
+        "name": "A5 (@:paper-size.landscape)",
+        "dimensions": {
+          "x": 210,
+          "y": 148
+        }
+      },
+      {
+        "name": "A6 (@:paper-size.portrait)",
+        "dimensions": {
+          "x": 105,
+          "y": 148
+        }
+      },
+      {
+        "name": "A6 (@:paper-size.landscape)",
+        "dimensions": {
+          "x": 148,
+          "y": 105
+        }
+      },
+      {
+        "name": "B3 (@:paper-size.portrait)",
+        "dimensions": {
+          "x": 353,
+          "y": 500
+        }
+      },
+      {
+        "name": "B4 (@:paper-size.portrait)",
+        "dimensions": {
+          "x": 250,
+          "y": 353
+        }
+      },
+      {
+        "name": "B5 (@:paper-size.portrait)",
+        "dimensions": {
+          "x": 176,
+          "y": 250
+        }
+      },
+      {
+        "name": "B5 (@:paper-size.landscape)",
+        "dimensions": {
+          "x": 250,
+          "y": 176
+        }
+      },
+      {
+        "name": "B6 (@:paper-size.portrait)",
+        "dimensions": {
+          "x": 125,
+          "y": 176
+        }
+      },
+      {
+        "name": "B6 (@:paper-size.landscape)",
+        "dimensions": {
+          "x": 176,
+          "y": 125
+        }
+      },
+      {
+        "name": "DIN D3 (@:paper-size.portrait)",
+        "dimensions": {
+          "x": 272,
+          "y": 385
+        }
+      },
+      {
+        "name": "DIN D4 (@:paper-size.portrait)",
+        "dimensions": {
+          "x": 192,
+          "y": 272
+        }
+      },
+      {
+        "name": "DIN D5 (@:paper-size.portrait)",
+        "dimensions": {
+          "x": 136,
+          "y": 192
+        }
+      },
+      {
+        "name": "DIN D5 (@:paper-size.landscape)",
+        "dimensions": {
+          "x": 192,
+          "y": 136
+        }
+      },
+      {
+        "name": "DIN D6 (@:paper-size.portrait)",
+        "dimensions": {
+          "x": 96,
+          "y": 136
+        }
+      },
+      {
+        "name": "DIN D6 (@:paper-size.landscape)",
+        "dimensions": {
+          "x": 136,
+          "y": 96
+        }
+      },
+      {
+        "name": "@:paper-size.letter (@:paper-size.portrait)",
+        "dimensions": {
+          "x": 216,
+          "y": 279
+        }
+      },
+      {
+        "name": "@:paper-size.legal (@:paper-size.portrait)",
+        "dimensions": {
+          "x": 216,
+          "y": 356
+        }
+      },
+      {
+        "name": "@:paper-size.tabloid (@:paper-size.portrait)",
+        "dimensions": {
+          "x": 279,
+          "y": 432
+        }
+      },
+      {
+        "name": "@:paper-size.ledger (@:paper-size.portrait)",
+        "dimensions": {
+          "x": 432,
+          "y": 279
+        }
+      },
+      {
+        "name": "@:paper-size.junior-legal (@:paper-size.portrait)",
+        "dimensions": {
+          "x": 127,
+          "y": 203
+        }
+      },
+      {
+        "name": "@:paper-size.half-letter (@:paper-size.portrait)",
+        "dimensions": {
+          "x": 140,
+          "y": 216
+        }
+      }
+    ],
+    "actions": []
+}
+
+
 function round(n, dp) {
   const f = Math.pow(10, dp || 0);
   return Math.round(n * f) / f;
@@ -140,13 +617,6 @@ export default {
     const request = Request.create(null, device);
 
     return {
-      context: {
-        devices: [
-          device
-        ],
-        paperSizes: [],
-        version: '0'
-      },
       device: device,
       img: null,
       request: request,
@@ -205,7 +675,7 @@ export default {
       };
 
       const allSizes = [{name: 'Maximum', dimensions: {x: deviceSize.x, y: deviceSize.y}}]
-      const paperSizes = this.context.paperSizes
+      const paperSizes = context.paperSizes
         .filter(paper => paper.dimensions.x <= deviceSize.x && paper.dimensions.y <= deviceSize.y)
         .map(paper => {
           const variables = (paper.name.match(/@:[a-z-.]+/ig) || []).map(s => s.substr(2));
@@ -259,9 +729,9 @@ export default {
 
   mounted() {
     this._resizePreview();
-    this.readContext().then(() => {
-      this.readPreview();
-    });
+    this.device = context.devices[0];
+    this.request = this.buildRequest();
+    this.readPreview();
     window.addEventListener('resize', () => {
       clearTimeout(this.preview.timer);
       this.preview.timer = setTimeout(this._resizePreview, 100);
@@ -432,33 +902,6 @@ export default {
       params.top = bestValue(params.top, adjusted.top, 0, scanner.height);
     },
 
-    readContext() {
-      // Only show notification if things are slow (first time / force)
-      const timer = window.setTimeout(() => {
-        this.notify({ type: 'i', message: this.$t('scan.message:loading-devices') });
-      }, 250);
-
-      return this._fetch('api/v1/context').then(context => {
-        window.clearTimeout(timer);
-
-        if (context.devices && context.devices.length > 0) {
-          this.context = context;
-          this.device = context.devices[0];
-          this.request = this.buildRequest();
-        } else {
-          this.notify({ type: 'e', message: this.$t('scan.message:no-devices') });
-        }
-      });
-    },
-
-    deviceRefresh() {
-      this._fetch('api/v1/context', {
-        method: 'DELETE'
-      }).then(() => {
-        this.readContext();
-      });
-    },
-
     readPreview() {
       // Gets the preview image as a base64 encoded jpg and updates the UI
       this._fetch('api/v1/preview', {
@@ -477,8 +920,8 @@ export default {
     buildRequest() {
       let request = storage.request;
       if (request && request.params) {
-        this.device = this.context.devices.filter(d => d.id === request.params.deviceId)[0]
-          || this.context.devices[0];
+        this.device = context.devices.filter(d => d.id === request.params.deviceId)[0]
+          || context.devices[0];
       }
 
       request = Request.create(request, this.device);

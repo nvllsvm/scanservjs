@@ -177,14 +177,8 @@ export default {
 
   methods: {
     actionList() {
-      this.$emit('mask', 1);
-      Common.fetch('api/v1/context').then(context => {
-        this.actions = context.actions;
-        this.$emit('mask', -1);
-      }).catch(error => {
-        this.$emit('notify', {type: 'e', message: error});
-        this.$emit('mask', -1);
-      });
+      // TODO remove
+      this.actions = [];
     },
 
     fileList() {

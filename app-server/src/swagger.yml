@@ -1,20 +1,4 @@
 paths:
-  /api/v1/context:
-    get:
-      summary: Gets scanner and configuration context
-      description: |
-        Gets, and reloads if necessary, the fulll system context including
-        configuration and scanner.
-      tags:
-        - System
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/definitions/Context'
-
   /api/v1/files:
     get:
       summary: List all scanned files
@@ -382,27 +366,6 @@ definitions:
             - 'JPG | @:pipeline.low-quality'
 
           "default": 'JPG | AMAZING quality'
-
-  Context:
-    properties:
-      version:
-        type: string
-        example: 2.2.2
-
-      devices:
-        type: array
-        items:
-          $ref: '#/definitions/Device'
-
-      paperSizes:
-        type: array
-        items:
-          type: object
-
-      actions:
-        type: array
-        items:
-          type: string
 
   FileInfo:
     properties:

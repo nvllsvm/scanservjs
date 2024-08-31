@@ -60,11 +60,6 @@ function formatForLog(req) {
 const EndpointSpecs = [
   {
     method: 'get',
-    path: '/api/v1/context',
-    callback: async (req, res) => res.send(await api.readContext())
-  },
-  {
-    method: 'get',
     path: '/api/v1/files',
     callback: async (req, res) => res.send(await api.fileList())
   },
