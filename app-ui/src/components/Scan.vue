@@ -796,6 +796,7 @@ export default {
 
     deletePreview() {
       this.mask(1);
+      this.resetPaperSize();
       Common.fetch('api/v1/preview', {
         method: 'DELETE'
       }).then(() => {
