@@ -57,7 +57,7 @@ module.exports = class Config {
 
       users: {},
 
-      previewResolution: 100,
+      previewResolution: 200,
       previewPipeline: {
         extension: 'jpg',
         description: 'JPG (Low quality)',
