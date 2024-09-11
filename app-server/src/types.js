@@ -62,7 +62,6 @@
  * @property {string} ocrLanguage
  * @property {string} scanimage
  * @property {string} convert
- * @property {string} tesseract
  * @property {string} devicesPath
  * @property {string} outputDirectory
  * @property {string} thumbnailDirectory

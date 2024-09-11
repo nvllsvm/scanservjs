@@ -47,7 +47,6 @@ module.exports = class Config {
 
       scanimage: '/usr/bin/scanimage',
       convert: '/usr/bin/convert',
-      tesseract: '/usr/bin/tesseract',
 
       devicesPath: path.join(BASE_PATH, 'data/devices.json'),
       outputDirectory: path.join(BASE_PATH, 'data/output'),
@@ -187,27 +186,6 @@ module.exports = class Config {
           'convert @- scan-0000.pdf',
           'ls scan-*.*'
         ]
-      },
-      {
-        extension: 'pdf',
-        description: '@:pipeline.ocr | PDF (JPG | @:pipeline.high-quality)',
-        get commands() {
-          return [
-            'while read filename ; do convert -quality 92 $filename converted-$(date +%s.%N).jpg ; done && ls converted-*.jpg',
-            `${config.tesseract} -l ${config.ocrLanguage} -c stream_filelist=true - - pdf > scan-0001.pdf`,
-            'ls scan-*.*'
-          ];
-        }
-      },
-      {
-        extension: 'txt',
-        description: '@:pipeline.ocr | @:pipeline.text-file',
-        get commands() {
-          return [
-            `${config.tesseract} -l ${config.ocrLanguage} -c stream_filelist=true - - txt > scan-0001.txt`,
-            'ls scan-*.*'
-          ];
-        }
       }
     ];
   }

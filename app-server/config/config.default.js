@@ -22,7 +22,6 @@ module.exports = {
     // config.log.level = 'DEBUG';
     // config.scanimage = '/usr/bin/scanimage';
     // config.convert = '/usr/bin/convert';
-    // config.tesseract = '/usr/bin/tesseract';
     // config.previewResolution = 100;
 
     /* When all scans are complete, the filenames are all piped into stdin of the
@@ -51,7 +50,6 @@ module.exports = {
     - `convert` can read a list of files from a file with the @ argument. The `-`
       file is stdin. So `convert @- -argument output` performs the conversion on
       each file piped into stdin
-    - `tesseract` has a similar feature using `-c stream_filelist=true`
     - `convert` can also output multiple files if you use an output filename with
       `%d` in it. C string style formatting is available so you can do things like
       output to `scan-%04d.jpg`. Formats which do not support multiple pages must
