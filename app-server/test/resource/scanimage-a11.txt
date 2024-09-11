@@ -37,11 +37,6 @@ All options specific to device `epson2:net:192.168.1.141':
     --wait-for-button[=(yes|no)] [no]
         After sending the scan command, wait until the button on the scanner
         is pressed to actually start the scan process.
-  Color correction:
-    --cct-type Automatic|Reflective|Colour negatives|Monochrome negatives|Colour positives [inactive]
-        Color correction profile type
-    --cct-profile -2..2,...
-        Color correction profile data
   Preview:
     --preview[=(yes|no)] [no]
         Request a preview-quality scan.
