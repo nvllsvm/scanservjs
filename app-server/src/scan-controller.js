@@ -71,36 +71,6 @@ class ScanController {
   }
 
   /**
-   * Creates a preview image from a scan. This is less trivial because we need
-   * to accommodate the possibility of cropping
-   * @param {string} filename
-   * @returns {Promise.<void>}
-   */
-  async updatePreview(filename) {
-    const device = this.context.getDevice(this.request.params.deviceId);
-    const cmdBuilder = new CommandBuilder(config.convert)
-      .arg(`${config.tempDirectory}/${filename}`);
-
-    const width = 868;
-    if (device.geometry) {
-      const scale = width / device.features['-x'].limits[1];
-      const height = Math.round(device.features['-y'].limits[1] * scale);
-      const left = Math.round(this.request.params.left * scale);
-      const top = Math.round(this.request.params.top * scale);
-      const scaleWidth = Math.round(this.request.params.width * scale);
-      cmdBuilder.arg('-scale', scaleWidth)
-        .arg('-background', '#808080')
-        .arg('-extent', `${width}x${height}-${left}-${top}`);
-    } else {
-      cmdBuilder.arg('-scale', width);
-    }
-
-    cmdBuilder.arg(`${config.previewDirectory}/preview.tif`);
-
-    await Process.spawn(cmdBuilder.build());
-  }
-
-  /**
    * @param {ScanRequest} req
    * @returns {Promise.<ScanResponse>}
    */
