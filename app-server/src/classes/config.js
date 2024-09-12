@@ -48,7 +48,6 @@ module.exports = class Config {
       scanimage: '/usr/bin/scanimage',
       convert: '/usr/bin/convert',
 
-      devicesPath: path.join(BASE_PATH, 'data/devices.json'),
       outputDirectory: path.join(BASE_PATH, 'data/output'),
       thumbnailDirectory: path.join(BASE_PATH, 'data/thumbnail'),
       previewDirectory: path.join(BASE_PATH, 'data/preview'),
