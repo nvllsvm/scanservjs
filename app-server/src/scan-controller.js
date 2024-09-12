@@ -67,7 +67,10 @@ class ScanController {
    */
   async scan() {
     log.info('Scanning');
-    await Process.spawn(scanimageCommand.scan(this.request));
+    let proc = await Process.spawn(scanimageCommand.scan(this.request));
+    let info = JSON.parse(proc.toString());
+    log.info(info);
+    return info;
   }
 
   /**
@@ -79,15 +82,11 @@ class ScanController {
 
     await this.deleteFiles();
 
-    await this.scan();
-
-    let files = await this.listFiles();
-    let filename = files[0].name;
-    const destination = `${config.outputDirectory}/${filename}`;
+    let info = await this.scan();
 
     await this.deleteFiles();
 
-    const fileInfo = FileInfo.create(destination);
+    const fileInfo = FileInfo.create(info.scanPath);
     return { fileInfo };
   }
 }
