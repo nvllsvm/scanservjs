@@ -45,24 +45,18 @@ module.exports = class Config {
         return `scan_${dayjs().format('YYYY-MM-DD HH.mm.ss')}`;
       },
 
-      scanimage: '/usr/bin/scanimage',
+      scanimage: '/usr/bin/scanservjs-epsonv600-scanimage',
       convert: '/usr/bin/convert',
 
-      outputDirectory: path.join(BASE_PATH, 'data/output'),
-      thumbnailDirectory: path.join(BASE_PATH, 'data/thumbnail'),
-      previewDirectory: path.join(BASE_PATH, 'data/preview'),
+      outputDirectory: '/data/scans',
+      thumbnailDirectory: '/data/thumbnails',
+      previewDirectory: '/data/preview',
+
       tempDirectory: path.join(BASE_PATH, 'data/temp'),
 
       users: {},
 
       previewResolution: 200,
-      previewPipeline: {
-        extension: 'jpg',
-        description: 'JPG (Low quality)',
-        commands: [
-          'convert - -quality 75 jpg:-'
-        ]
-      },
 
       paperSizes: [
         { name: 'A3 (@:paper-size.portrait)', dimensions: { x: 297, y: 420 } },
@@ -93,100 +87,6 @@ module.exports = class Config {
     });
 
     const config = this;
-    this.pipelines = [
-      {
-        extension: 'jpg',
-        description: 'JPG | @:pipeline.high-quality',
-        commands: [
-          'while read filename ; do convert -quality 92 $filename scan-$(date +%s.%N).jpg ; done',
-          'ls scan-*.*'
-        ]
-      },
-      {
-        extension: 'jpg',
-        description: 'JPG | @:pipeline.medium-quality',
-        commands: [
-          'while read filename ; do convert -quality 75 $filename scan-$(date +%s.%N).jpg ; done',
-          'ls scan-*.*'
-        ]
-      },
-      {
-        extension: 'jpg',
-        description: 'JPG | @:pipeline.low-quality',
-        commands: [
-          'while read filename ; do convert -quality 50 $filename scan-$(date +%s.%N).jpg ; done',
-          'ls scan-*.*'
-        ]
-      },
-      {
-        extension: 'png',
-        description: 'PNG',
-        commands: [
-          'while read filename ; do convert -quality 75 $filename scan-$(date +%s.%N).png ; done',
-          'ls scan-*.*'
-        ]
-      },
-      {
-        extension: 'tif',
-        description: 'TIF | @:pipeline.uncompressed',
-        commands: [
-          'while read filename ; do convert $filename scan-$(date +%s.%N).tif ; done',
-          'ls scan-*.*'
-        ]
-      },
-      {
-        extension: 'tif',
-        description: 'TIF | @:pipeline.lzw-compressed',
-        commands: [
-          'while read filename ; do convert -compress lzw $filename scan-$(date +%s.%N).tif ; done',
-          'ls scan-*.*'
-        ]
-      },
-      {
-        extension: 'pdf',
-        description: 'PDF (TIF | @:pipeline.uncompressed)',
-        commands: [
-          'convert @- scan-0000.pdf',
-          'ls scan-*.*'
-        ]
-      },
-      {
-        extension: 'pdf',
-        description: 'PDF (TIF | @:pipeline.lzw-compressed)',
-        commands: [
-          'while read filename ; do convert -compress lzw $filename converted-$(date +%s.%N).tif ; done && ls converted-*.tif',
-          'convert @- scan-0000.pdf',
-          'ls scan-*.*'
-        ]
-      },
-      {
-        extension: 'pdf',
-        description: 'PDF (JPG | @:pipeline.high-quality)',
-        commands: [
-          'while read filename ; do convert -quality 92 $filename converted-$(date +%s.%N).jpg ; done && ls converted-*.jpg',
-          'convert @- scan-0000.pdf',
-          'ls scan-*.*'
-        ]
-      },
-      {
-        extension: 'pdf',
-        description: 'PDF (JPG | @:pipeline.medium-quality)',
-        commands: [
-          'while read filename ; do convert -quality 75 $filename converted-$(date +%s.%N).jpg ; done && ls converted-*.jpg',
-          'convert @- scan-0000.pdf',
-          'ls scan-*.*'
-        ]
-      },
-      {
-        extension: 'pdf',
-        description: 'PDF (JPG | @:pipeline.low-quality)',
-        commands: [
-          'while read filename ; do convert -quality 50 $filename converted-$(date +%s.%N).jpg ; done && ls converted-*.jpg',
-          'convert @- scan-0000.pdf',
-          'ls scan-*.*'
-        ]
-      }
-    ];
   }
 
   addEnvironment() {

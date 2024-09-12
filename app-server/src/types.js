@@ -31,14 +31,6 @@
  */
 
 /**
- * @typedef {Object} Pipeline
- * @property {string} extension
- * @property {string} description
- * @property {string[]} commands
- * @property {string} [afterAction]
- */
-
-/**
  * @typedef {Object} Dimensions
  * @property {number} x
  * @property {number} y
@@ -67,8 +59,6 @@
  * @property {string} previewDirectory
  * @property {string} tempDirectory
  * @property {number} previewResolution
- * @property {Pipeline} previewPipeline
- * @property {Pipeline[]} pipelines
  * @property {PaperSize[]} paperSizes
  */
 
@@ -91,7 +81,6 @@
 /**
  * @typedef {Object} ScanRequest
  * @property {ScanRequestParameters} params
- * @property {string} pipeline
  */
 
 /**

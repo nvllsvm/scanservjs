@@ -32,8 +32,7 @@ module.exports = class Request {
    */
   constructor(context, data) {
     Object.assign(this, {
-      params: {},
-      pipeline: null
+      params: {}
     });
 
     const device = context.getDevice(data.params.deviceId);
@@ -43,13 +42,9 @@ module.exports = class Request {
       params: {
         deviceId: device.id,
         resolution: data.params.resolution || features['--resolution'].default,
-        format: data.params.format || features['--format'].default,
         isPreview: data.params.isPreview || false
-      },
-      pipeline: data.pipeline || device.settings.pipeline.default
+      }
     });
-
-    assertContains(device.settings['pipeline'].options, this.pipeline, 'Invalid pipeline');
 
     if ('-t' in features) {
       this.params.top = constrainWithFeature(data.params.top || features['-t'].limits[0], features['-t']);
@@ -73,6 +68,10 @@ module.exports = class Request {
     if ('--mode' in features) {
       this.params.mode = data.params.mode || features['--mode'].default;
       assertContains(features['--mode'].options, this.params.mode, 'Invalid --mode');
+    }
+    if ('--format' in features) {
+      this.params.format = data.params.format || features['--format'].default;
+      assertContains(features['--format'].options, this.params.format, 'Invalid --format');
     }
     if ('--adf-mode' in features) {
       this.params.adfMode = data.params.adfMode || features['--adf-mode'].default;

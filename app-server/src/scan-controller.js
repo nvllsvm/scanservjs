@@ -27,24 +27,6 @@ class ScanController {
   async init(req) {
     this.context = await application.context();
     this.request = new Request(this.context, req);
-    this.pipeline = config.pipelines
-      .filter(p => p.description === this.request.pipeline)[0];
-    if (this.pipeline === undefined) {
-      throw Error('No matching pipeline');
-    }
-    switch (this.request.pipeline) {
-        case 'JPG':
-            this.request.params.format = 'jpeg'
-            break;
-        case 'PNG':
-            this.request.params.format = 'png'
-            break;
-        case 'TIF':
-            this.request.params.format = 'tiff'
-            break;
-        default:
-            throw Error('No matching format');
-    }
   }
 
   /**

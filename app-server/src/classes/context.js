@@ -22,10 +22,6 @@ module.exports = class Context {
 
     const defaultSettings = () => {
       return {
-        pipeline: {
-          options: config.pipelines.map(p => p.description),
-          default: config.pipelines[0].description
-        }
       };
     };
 
@@ -33,8 +29,6 @@ module.exports = class Context {
     devices.forEach(device => {
       device.settings = defaultSettings();
     });
-
-    userOptions.afterDevices(devices);
 
     // Re-add defaults in case user adds new devices
     devices.forEach(device => {

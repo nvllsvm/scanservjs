@@ -358,15 +358,6 @@ definitions:
             - 100        
           "interval": 1
 
-      "settings":
-        "pipeline":
-          "options":
-            - 'JPG | @:pipeline.high-quality'
-            - 'JPG | @:pipeline.medium-quality'
-            - 'JPG | @:pipeline.low-quality'
-
-          "default": 'JPG | AMAZING quality'
-
   FileInfo:
     properties:
       "fullname":
@@ -465,13 +456,8 @@ definitions:
       params:
         $ref: '#/definitions/ScanRequestParameters'
 
-      pipeline:
-        type: string
-        example: 'JPG | @:pipeline.high-quality'
-    
     required:
       - params
-      - pipeline
 
   ScanResponse:
     properties:

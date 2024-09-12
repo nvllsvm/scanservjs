@@ -14,9 +14,9 @@ export default class Request {
       version: Constants.Version,
       params: {
         deviceId: device.id,
+        format: request.params.format || device.features['--format'].default,
         resolution: request.params.resolution || device.features['--resolution'].default
-      },
-      pipeline: request.pipeline || device.settings.pipeline.default
+      }
     });
 
     if ('-x' in device.features) {

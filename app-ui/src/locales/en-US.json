@@ -112,6 +112,14 @@
     "no": "Disabled"
   },
 
+  "format": {
+    "jpeg": "JPEG",
+    "jpeg-xl": "JPEG XL",
+    "png": "PNG",
+    "ppm": "PPM",
+    "tiff": "TIFF"
+  },
+
   "source": {
     "flatbed": "Flatbed",
     "adf": "ADF",
